@@ -741,17 +741,27 @@ function renderHome(){
   let h='',lp=0;
   WEEKS.forEach(w=>{
     const col=PC(w.p);
-    if(w.p!==lp){lp=w.p;h+=`<div class="phase-lbl" style="color:${col}">${w.pn}</div>`;}
-    const dots=[1,2,3,4,5].map(i=>`<div class="dot${i<=w.int?" on":""}"></div>`).join('');
-    const bdg=(w.dl?`<span class="badge" style="background:rgba(77,171,247,.15);color:#4dabf7">Deload</span>`:'')
-      +(w.ts?`<span class="badge" style="background:rgba(200,241,53,.2);color:#c8f135">⭐ 1RM</span>`:'');
-    h+=`<div class="wcard" onclick="openWeek(${w.w})">
-      <div class="wnum" style="color:${col}">W${w.w}</div>
-      <div class="winfo">
-        <div class="wfocus">${w.focus}</div>
-        <div class="wbadges">${bdg}<div class="dots">${dots}</div></div>
+    if(w.p!==lp){
+      lp=w.p;
+      h+=`<div style="font-size:9px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:${col};padding:14px 4px 6px;font-family:monospace;margin:0 12px">${w.pn}</div>`;
+    }
+    // Intensity dots — exactly like React: width:14px,height:3px,borderRadius:2px
+    const dots=[1,2,3,4,5].map(i=>
+      `<div style="width:14px;height:3px;border-radius:2px;background:${i<=w.int?'#c8f135':'#2a2a2a'}"></div>`
+    ).join('');
+    // Badges
+    const bdg=(w.dl?`<span style="font-size:8px;background:rgba(77,171,247,0.15);color:#4dabf7;padding:1px 6px;border-radius:7px;font-weight:700">Deload</span>`:'')
+      +(w.ts?`<span style="font-size:8px;background:rgba(200,241,53,0.2);color:#c8f135;padding:1px 6px;border-radius:7px;font-weight:700">⭐ 1RM</span>`:'');
+    h+=`<div onclick="openWeek(${w.w})" style="background:#111;margin:0 12px 6px;border-radius:12px;padding:12px 14px;display:flex;align-items:center;gap:10px;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:opacity 0.15s" ontouchstart="this.style.opacity=0.65" ontouchend="this.style.opacity=1">
+      <div style="font-size:22px;font-weight:800;color:${col};width:36px;flex-shrink:0;line-height:1">W${w.w}</div>
+      <div style="flex:1;min-width:0">
+        <div style="font-size:11px;color:#585858;margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${w.focus}</div>
+        <div style="display:flex;gap:4px;align-items:center;flex-wrap:wrap">
+          ${bdg}
+          <div style="display:flex;gap:2px">${dots}</div>
+        </div>
       </div>
-      <div style="color:var(--dim);font-size:18px">›</div>
+      <div style="color:#2a2a2a;font-size:18px">›</div>
     </div>`;
   });
   document.getElementById('home-list').innerHTML=h;
@@ -760,32 +770,34 @@ function renderHome(){
 function openWeek(wn){
   curW=WEEKS.find(w=>w.w===wn);
   const col=PC(curW.p);
-  const dots=[1,2,3,4,5].map(i=>`<div class="dot${i<=curW.int?" on":""}"></div>`).join('');
-  const bdg=(curW.dl?`<span class="badge" style="background:rgba(77,171,247,.15);color:#4dabf7">Deload</span>`:'')
-    +(curW.ts?`<span class="badge" style="background:rgba(200,241,53,.2);color:#c8f135">⭐ 1RM</span>`:'');
+  // Intensity dots — large version for week hero (width:22px like React)
+  const dots=[1,2,3,4,5].map(i=>
+    `<div style="width:22px;height:3px;border-radius:2px;background:${i<=curW.int?'#c8f135':'#252525'}"></div>`
+  ).join('');
+  const bdg=(curW.dl?`<span style="font-size:9px;background:rgba(77,171,247,0.15);color:#4dabf7;padding:2px 8px;border-radius:8px;font-weight:700">DELOAD</span>`:'')
+    +(curW.ts?`<span style="font-size:9px;background:rgba(200,241,53,0.2);color:#c8f135;padding:2px 8px;border-radius:8px;font-weight:700">⭐ TESTING</span>`:'');
   document.getElementById('week-tb').textContent=`Semana ${wn}`;
   document.getElementById('week-hero').innerHTML=`
-    <div class="week-phase" style="color:${col}">${curW.pn}</div>
-    <div class="week-title">Semana ${wn} ${bdg}</div>
-    <div class="week-focus">${curW.focus}</div>
-    <div class="dots" style="margin-top:4px">${dots}</div>`;
+    <div style="font-size:9px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:${col};font-family:monospace;margin-bottom:4px">${curW.pn}</div>
+    <div style="font-size:20px;font-weight:700;display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:4px">Semana ${wn} ${bdg}</div>
+    <div style="font-size:12px;color:#585858;line-height:1.5;margin-bottom:8px">${curW.focus}</div>
+    <div style="display:flex;gap:3px">${dots}</div>`;
+  document.getElementById('week-hero').style.cssText='padding:14px;border-bottom:1px solid #232323;flex-shrink:0;background:'+col+'08';
   let h='';
   DAYS.forEach((d,i)=>{
     const dn=i+1,title=getDayTitle(curW,dn),dur=getDur(curW,dn);
-    if(d.opt){
-      h+=`<div class="dcard opt" onclick="openDay(${dn})">
-        <div class="opt-lbl">OPCIONAL</div>
-        <div class="dcard-top"><div class="ddot" style="background:${d.col}"></div><div class="dname">${d.n}</div><div class="ddur">${dur}</div></div>
-        <div style="font-size:12px;color:var(--muted);margin-bottom:6px">${title}</div>
-        <span class="dtype" style="background:${d.col}22;color:${d.col}">${d.type}</span>
-      </div>`;
-    } else {
-      h+=`<div class="dcard" onclick="openDay(${dn})">
-        <div class="dcard-top"><div class="ddot" style="background:${d.col}"></div><div class="dname">${d.n}</div><div class="ddur">${dur}</div></div>
-        <div style="font-size:12px;color:var(--muted);margin-bottom:6px">${title}</div>
-        <span class="dtype" style="background:${d.col}22;color:${d.col}">${d.type}</span>
-      </div>`;
-    }
+    const optBadge=d.opt?`<div style="font-size:9px;color:#585858;font-style:italic;margin-bottom:4px">OPCIONAL</div>`:'';
+    const border=d.opt?'border:1px dashed #2e2e2e;background:transparent':'background:#111';
+    h+=`<div onclick="openDay(${dn})" style="${border};margin:0 12px 7px;border-radius:12px;padding:13px 15px;cursor:pointer;-webkit-tap-highlight-color:transparent" ontouchstart="this.style.opacity=0.65" ontouchend="this.style.opacity=1">
+      ${optBadge}
+      <div style="display:flex;align-items:center;gap:9px;margin-bottom:6px">
+        <div style="width:9px;height:9px;border-radius:50%;background:${d.col};flex-shrink:0"></div>
+        <div style="font-weight:600;font-size:14px;color:#e0e0e0;flex:1">${d.n}</div>
+        <div style="font-size:11px;color:#585858">${dur}</div>
+      </div>
+      <div style="font-size:12px;color:#585858;margin-bottom:6px">${title}</div>
+      <span style="font-size:8px;padding:2px 8px;border-radius:7px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;background:${d.col}22;color:${d.col}">${d.type}</span>
+    </div>`;
   });
   document.getElementById('week-days').innerHTML=h;
   document.querySelector('#week-view .scroll').scrollTop=0;
@@ -803,17 +815,18 @@ function openDay(dn){
   const title=getDayTitle(curW,dn),dur=getDur(curW,dn);
   const timing=getTimingBlocks(curW,dn);
   const timingHtml=timing.map(([n,t,c])=>`<div class="tblock" style="background:${c}22;color:${c}">${n} ${t}</div>`).join('');
+  const pcol=PC(curW.p);
   document.getElementById('sess-tb').textContent=`S${curW.w} · ${d.n}`;
+  document.getElementById('sess-hero').style.cssText=`padding:14px;border-bottom:1px solid #232323;flex-shrink:0;background:${col}08`;
   document.getElementById('sess-hero').innerHTML=`
-    <div class="sess-type" style="color:${col}">${d.type}</div>
-    <div class="sess-title">${title}</div>
-    <div class="smeta">
-      <span class="stag">${dur}</span>
-      <span class="stag" style="color:${PC(curW.p)}">${curW.pn}</span>
-      ${d.opt?'<span class="stag" style="color:var(--red)">OPCIONAL</span>':''}
+    <div style="font-size:9px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:${col};font-family:monospace;margin-bottom:4px">${d.type}</div>
+    <div style="font-size:18px;font-weight:700;line-height:1.2;margin-bottom:8px">${title}</div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px">
+      <span style="font-size:10px;color:#585858;background:#181818;padding:3px 9px;border-radius:8px">${dur}</span>
+      <span style="font-size:10px;color:${pcol};background:${pcol}18;padding:3px 9px;border-radius:8px">${curW.pn}</span>
+      ${d.opt?'<span style="font-size:10px;color:#ff6b6b;background:rgba(255,107,107,0.15);padding:3px 9px;border-radius:8px">OPCIONAL</span>':''}
     </div>
-    <div class="timing-bar">${timingHtml}</div>`;
-  document.getElementById('sess-hero').style.background=`${col}08`;
+    <div style="display:flex;gap:3px;flex-wrap:wrap">${timingHtml}</div>`;
 
   const blocks=getBlocks(curW,dn);
   let h='';
