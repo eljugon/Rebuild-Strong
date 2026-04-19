@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git checkout *)",
+      "Bash(git merge *)",
+      "Bash(git push *)"
+    ]
+  },
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cd /home/user/Rebuild-Strong && current=$(git branch --show-current) && ahead=$(git rev-list main..HEAD --count 2>/dev/null) && [ \"$ahead\" -gt 0 ] && git checkout main && git merge \"$current\" --no-edit && git push origin main && git checkout \"$current\" || true",
+            "timeout": 60,
+            "statusMessage": "Pushing to main..."
+          }
+        ]
+      }
+    ]
+  }
+}
