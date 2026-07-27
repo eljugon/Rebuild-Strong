@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
+<meta name="theme-color" content="#0E2A2F">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Programa — 12 semanas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0E2A2F;
+  --ink2:#143A40;
+  --ink3:#1D4C55;
+  --line:#26606A;
+  --bone:#F0EBE1;
+  --dim:#94AFAE;
+  --amber:#E8A33D;
+  --amber2:#F3C877;
+  --sage:#6FAE8B;
+  --rust:#D0563C;
+  --display:'Bricolage Grotesque',system-ui,sans-serif;
+  --body:'Instrument Sans',system-ui,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,monospace;
+  --rail:82px;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{
+  background:var(--ink);color:var(--bone);font-family:var(--body);
+  font-size:16px;line-height:1.45;overscroll-behavior:none;
+  -webkit-font-smoothing:antialiased;position:relative;
+}
+body::before{
+  content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:
+    radial-gradient(560px circle at 12% -8%, rgba(232,163,61,.11), transparent 60%),
+    radial-gradient(480px circle at 105% 8%, rgba(111,174,139,.09), transparent 55%),
+    radial-gradient(420px circle at 50% 115%, rgba(208,86,60,.06), transparent 55%);
+}
+button{font-family:inherit;font-size:inherit;color:inherit;background:none;border:none;cursor:pointer}
+a{color:inherit}
+#app{max-width:560px;margin:0 auto;min-height:100%;display:flex;flex-direction:column;position:relative}
+
+/* ---------- typography ---------- */
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);font-weight:600}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(30px,8.5vw,44px);line-height:1.02;letter-spacing:-.025em}
+h2{font-family:var(--display);font-weight:700;font-size:22px;line-height:1.1;letter-spacing:-.015em}
+.mono{font-family:var(--mono)}
+.gradtext{color:var(--bone);background:linear-gradient(120deg,var(--bone) 15%,var(--amber2) 95%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+
+/* ---------- shell ---------- */
+.screen{flex:1;display:flex;flex-direction:column;padding:24px 20px calc(var(--rail) + 24px);animation:fade .32s cubic-bezier(.2,.8,.3,1) both}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* ---------- home ---------- */
+.topbar{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:24px}
+.weekchip{font-family:var(--mono);font-size:12px;font-weight:600;color:var(--amber);border:1px solid var(--line);border-radius:100px;padding:4px 11px;background:rgba(232,163,61,.06)}
+.today{border:1px solid var(--line);border-radius:22px;padding:24px 22px;background:var(--ink2);position:relative;overflow:hidden}
+.today::before{content:'';position:absolute;inset:0 auto 0 0;width:4px;background:linear-gradient(180deg,var(--amber2),var(--amber))}
+.today .lab{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--amber);font-weight:700}
+.todayhead{display:flex;justify-content:space-between;align-items:flex-start;gap:14px}
+.today h1{margin:10px 0 4px}
+.today .sub{color:var(--dim);font-size:15px}
+.metarow{display:flex;gap:8px;margin-top:18px;flex-wrap:wrap}
+.pill{font-family:var(--mono);font-size:11px;font-weight:600;padding:5px 10px;border-radius:6px;background:var(--ink3);color:var(--bone)}
+
+/* progress ring */
+.ring{--p:0;width:54px;height:54px;border-radius:50%;position:relative;flex:0 0 auto;margin-top:2px;
+  background:conic-gradient(var(--amber) calc(var(--p)*1%), rgba(240,235,225,.1) 0);
+  transition:background 1.1s cubic-bezier(.2,.8,.3,1)}
+.ring::before{content:'';position:absolute;inset:5px;border-radius:50%;background:var(--ink2)}
+.ring span{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11.5px;font-weight:700;color:var(--bone)}
+
+.cta{display:block;width:100%;margin-top:16px;padding:19px;border-radius:16px;
+  background:linear-gradient(135deg,var(--amber2),var(--amber));color:#12242A;
+  box-shadow:0 10px 26px -12px rgba(232,163,61,.6);
+  font-family:var(--display);font-weight:800;font-size:19px;letter-spacing:-.01em;transition:transform .12s}
+.cta:active{transform:scale(.985)}
+.cta.ghost{background:none;box-shadow:none;border:1px solid var(--line);color:var(--bone);font-size:16px;padding:15px}
+
+/* ---------- bento grid ---------- */
+.bento{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.bento>*{animation:fade .35s cubic-bezier(.2,.8,.3,1) both}
+.bento>*:nth-child(1){animation-delay:.03s}
+.bento>*:nth-child(2){animation-delay:.07s}
+.bento>*:nth-child(3){animation-delay:.11s}
+.bento>*:nth-child(4){animation-delay:.15s}
+.tile{border:1px solid var(--line);border-radius:16px;padding:16px 15px;text-align:left;background:var(--ink2);
+  display:flex;flex-direction:column;gap:12px;transition:transform .15s,border-color .15s}
+.tile:active{transform:scale(.97);border-color:var(--amber)}
+.tile .ic{width:34px;height:34px;border-radius:10px;background:var(--ink3);display:flex;align-items:center;justify-content:center;color:var(--amber);flex:0 0 auto}
+.tile .ic svg{width:17px;height:17px}
+.tile .n{font-family:var(--display);font-weight:700;font-size:16px;display:block}
+.tile .d{font-size:12.5px;color:var(--dim);margin-top:2px;display:block;line-height:1.3}
+.tile.wide{grid-column:1/-1;flex-direction:row;align-items:center}
+.tile.flare-tile{grid-column:1/-1;flex-direction:row;align-items:center;border-color:rgba(208,86,60,.35);background:rgba(208,86,60,.07)}
+.tile.flare-tile .ic{background:rgba(208,86,60,.16);color:var(--rust)}
+
+/* ---------- phase strip ---------- */
+.phases{display:flex;gap:5px;margin-top:26px}
+.ph{flex:1;text-align:left}
+.ph .bar{height:5px;border-radius:3px;background:var(--ink3);margin-bottom:7px;overflow:hidden}
+.ph .bar i{display:block;height:100%;background:linear-gradient(90deg,var(--amber),var(--amber2));border-radius:3px;transition:width .6s cubic-bezier(.2,.8,.3,1)}
+.ph .t{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);font-weight:600}
+.ph.on .t{color:var(--bone)}
+
+/* ---------- runner ---------- */
+.rail{display:flex;gap:3px;margin-bottom:20px}
+.rail i{flex:1;height:3px;border-radius:2px;background:var(--ink3);transition:background .3s}
+.rail i.done{background:var(--sage)}
+.rail i.now{background:var(--amber)}
+
+.blocklab{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.exwrap{flex:1;display:flex;flex-direction:column;justify-content:center;min-height:0}
+.exnum{font-family:var(--mono);font-size:12px;color:var(--dim);font-weight:600;margin-bottom:12px}
+.exname{font-family:var(--display);font-weight:800;font-size:clamp(30px,8.5vw,42px);line-height:1.02;letter-spacing:-.03em;margin-bottom:16px}
+.doserow{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:20px;flex-wrap:wrap}
+.dose{font-family:var(--mono);font-size:26px;font-weight:700;color:var(--amber);letter-spacing:-.02em}
+.cues{list-style:none;display:flex;flex-direction:column;gap:9px;margin-bottom:22px}
+.cues li{font-size:15px;line-height:1.4;padding-left:16px;position:relative;color:#D5DEDB}
+.cues li::before{content:'';position:absolute;left:0;top:9px;width:6px;height:6px;border-radius:50%;background:var(--line)}
+
+/* ---------- video link ---------- */
+.vidbtn{display:inline-flex;align-items:center;gap:7px;padding:9px 15px 9px 12px;border-radius:100px;
+  border:1px solid var(--line);background:rgba(240,235,225,.06);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  color:var(--bone);font-family:var(--mono);font-size:12.5px;font-weight:700;letter-spacing:.03em;
+  text-decoration:none;transition:transform .15s,border-color .15s,color .15s,background .15s;flex:0 0 auto}
+.vidbtn svg{width:13px;height:13px;flex:0 0 auto}
+.vidbtn:active{transform:scale(.95);background:rgba(232,163,61,.15);border-color:var(--amber);color:var(--amber)}
+.vidicon{width:32px;height:32px;border-radius:50%;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;
+  flex:0 0 auto;color:var(--dim);text-decoration:none;transition:transform .15s,border-color .15s,color .15s,background .15s}
+.vidicon svg{width:13px;height:13px}
+.vidicon:active{transform:scale(.92);background:rgba(232,163,61,.15);border-color:var(--amber);color:var(--amber)}
+
+.warn{border-left:3px solid var(--rust);background:rgba(208,86,60,.1);padding:12px 14px;border-radius:0 10px 10px 0;font-size:14px;margin-bottom:20px;line-height:1.4}
+.warn b{color:var(--rust)}
+
+.sets{display:flex;gap:9px;margin-bottom:18px}
+.setbtn{flex:1;padding:17px 0;border-radius:13px;border:1.5px solid var(--line);font-family:var(--mono);font-weight:700;font-size:15px;color:var(--dim);transition:.18s}
+.setbtn.done{background:var(--sage);border-color:var(--sage);color:#0E2A2F}
+
+.timer{text-align:center;padding:18px;border:1px solid var(--line);border-radius:16px;margin-bottom:18px;background:var(--ink2);transition:border-color .2s,box-shadow .2s}
+.timer.active{border-color:var(--amber);box-shadow:0 0 0 1px rgba(232,163,61,.4) inset,0 10px 30px -12px rgba(232,163,61,.4)}
+.timer .num{font-family:var(--mono);font-size:52px;font-weight:700;line-height:1;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.timer .num.rest{color:var(--amber)}
+.timer .lab{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-top:8px;font-weight:600}
+.timer .acts{display:flex;gap:8px;margin-top:14px}
+.timer .acts button{flex:1;padding:11px;border-radius:10px;border:1px solid var(--line);font-size:14px;font-weight:600}
+
+.nav{display:flex;gap:10px;margin-top:auto;padding-top:18px}
+.nav button{padding:16px;border-radius:14px;font-weight:600;font-size:16px}
+.nav .prev{flex:0 0 58px;border:1px solid var(--line);color:var(--dim)}
+.nav .next{flex:1;background:var(--bone);color:var(--ink);font-family:var(--display);font-weight:800;font-size:18px}
+.nav .next:disabled{opacity:.35}
+
+/* ---------- symptom rail (signature) ---------- */
+.symrail{position:fixed;bottom:0;left:0;right:0;max-width:560px;margin:0 auto;z-index:40;
+  background:rgba(20,58,64,.78);backdrop-filter:blur(20px) saturate(160%);-webkit-backdrop-filter:blur(20px) saturate(160%);
+  border-top:1px solid var(--line);
+  padding:11px 14px calc(11px + env(safe-area-inset-bottom));display:flex;gap:8px;align-items:center}
+.symrail .q{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);font-weight:600;flex:0 0 auto;line-height:1.2;max-width:74px}
+.sym{flex:1;padding:12px 4px;border-radius:11px;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.03em;
+  border:1.5px solid;transition:transform .12s,background .18s;text-align:center;line-height:1.25}
+.sym:active{transform:scale(.95)}
+.sym.g{border-color:var(--sage);color:var(--sage)}
+.sym.a{border-color:var(--amber);color:var(--amber)}
+.sym.r{border-color:var(--rust);color:var(--rust)}
+.sym.g:active{background:rgba(111,174,139,.16)}
+.sym.a:active{background:rgba(232,163,61,.16)}
+.sym.r:active{background:rgba(208,86,60,.16)}
+
+/* ---------- bottom tab bar ---------- */
+.tabbar{position:fixed;bottom:0;left:0;right:0;max-width:560px;margin:0 auto;z-index:40;
+  background:rgba(20,58,64,.78);backdrop-filter:blur(20px) saturate(160%);-webkit-backdrop-filter:blur(20px) saturate(160%);
+  border-top:1px solid var(--line);
+  padding:9px 8px calc(9px + env(safe-area-inset-bottom));display:flex;gap:2px}
+.tab{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;padding:7px 0;border-radius:12px;color:var(--dim);transition:color .15s,transform .15s}
+.tab svg{width:19px;height:19px}
+.tab span{font-family:var(--mono);font-size:9.5px;font-weight:600;letter-spacing:.03em;text-transform:uppercase}
+.tab.on{color:var(--amber)}
+.tab:active{transform:scale(.92)}
+
+/* ---------- sheet ---------- */
+.veil{position:fixed;inset:0;background:rgba(6,20,23,.6);backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);z-index:60;display:flex;align-items:flex-end;justify-content:center;animation:fade .2s ease both}
+.sheet{width:100%;max-width:560px;background:var(--ink2);border-top:1px solid var(--line);border-radius:22px 22px 0 0;
+  padding:26px 20px calc(26px + env(safe-area-inset-bottom));max-height:88vh;overflow-y:auto;animation:up .3s cubic-bezier(.2,.8,.3,1) both}
+@keyframes up{from{transform:translateY(28px)}to{transform:none}}
+.sheet h2{margin-bottom:10px}
+.sheet p{color:#CBD8D5;font-size:15px;margin-bottom:16px;line-height:1.5}
+.sheet .verdict{border-radius:14px;padding:16px;margin-bottom:16px;font-size:15px;line-height:1.5}
+.verdict.g{background:rgba(111,174,139,.13);border-left:3px solid var(--sage)}
+.verdict.a{background:rgba(232,163,61,.13);border-left:3px solid var(--amber)}
+.verdict.r{background:rgba(208,86,60,.13);border-left:3px solid var(--rust)}
+.verdict b{display:block;font-family:var(--display);font-weight:700;font-size:17px;margin-bottom:5px}
+
+/* ---------- forms ---------- */
+.field{margin-bottom:22px}
+.field label{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--dim);font-weight:600;margin-bottom:10px}
+.scale{display:flex;gap:4px}
+.scale button{flex:1;padding:13px 0;border-radius:9px;border:1px solid var(--line);font-family:var(--mono);font-size:13px;font-weight:600;color:var(--dim)}
+.scale button.on{background:var(--amber);border-color:var(--amber);color:#12242A}
+.choice{display:flex;gap:8px}
+.choice button{flex:1;padding:14px;border-radius:12px;border:1px solid var(--line);font-weight:600;font-size:14.5px;color:var(--dim)}
+.choice button.on{background:var(--bone);border-color:var(--bone);color:var(--ink)}
+textarea,select{width:100%;background:var(--ink);border:1px solid var(--line);border-radius:12px;padding:13px;
+  color:var(--bone);font-family:var(--body);font-size:15px;resize:none}
+textarea:focus,select:focus{outline:2px solid var(--amber);outline-offset:1px}
+
+/* ---------- history ---------- */
+.logrow{display:flex;gap:13px;align-items:center;padding:15px 0;border-bottom:1px solid var(--ink3)}
+.logrow .dot{flex:0 0 9px;height:9px;border-radius:50%}
+.logrow .info{flex:1;min-width:0}
+.logrow .info b{font-family:var(--display);font-weight:700;font-size:15.5px}
+.logrow .info span{display:block;font-size:12.5px;color:var(--dim);margin-top:1px}
+.logrow .p{font-family:var(--mono);font-size:12px;color:var(--dim);font-weight:600;text-align:right;flex:0 0 auto}
+.spark{display:flex;align-items:flex-end;gap:3px;height:56px;margin:16px 0 4px}
+.spark i{flex:1;background:var(--ink3);border-radius:2px 2px 0 0;min-height:3px}
+.empty{text-align:center;padding:44px 20px;color:var(--dim);font-size:14.5px;line-height:1.6}
+
+/* ---------- misc ---------- */
+.back{font-family:var(--mono);font-size:12px;color:var(--dim);font-weight:600;letter-spacing:.06em;margin-bottom:18px;text-align:left;padding:4px 0}
+.note{font-size:13.5px;color:var(--dim);line-height:1.55;margin-top:14px}
+.hr{height:1px;background:var(--ink3);margin:26px 0}
+.flarebar{background:rgba(208,86,60,.14);border:1px solid var(--rust);border-radius:14px;padding:15px;margin-bottom:18px}
+.flarebar b{font-family:var(--display);font-weight:700;font-size:16px;color:var(--rust);display:block;margin-bottom:4px}
+.flarebar p{font-size:14px;color:#DFD6D0;line-height:1.45}
+:focus-visible{outline:2px solid var(--amber);outline-offset:2px;border-radius:6px}
+</style>
+</head>
+<body>
+<div id="app"></div>
+
+<script>
+/* ============================================================
+   DATOS DEL PROGRAMA
+   ============================================================ */
+const WARM_F1 = {block:'Calentamiento', items:[
+  {n:'Respiración 360°', d:'8 respiraciones', c:['Tumbada, manos en las costillas laterales','Inspirar abriendo costillas y relajando el suelo pélvico','Exhalar cerrando suave, sin apretar glúteos'], sets:1},
+  {n:'Gato-camello', d:'10 ciclos', c:['En cuadrupedia, lento','Sin forzar los extremos del rango'], sets:1},
+  {n:'CARs de cadera', d:'5 círculos por lado', c:['Rodilla al pecho → abrir al lado → llevar atrás → cerrar','Si se mueve la espalda, el círculo es demasiado grande'], sets:1, side:true},
+  {n:'Puente de glúteo', d:'12 reps', c:['Exhalar al subir','Apretar el glúteo, no la lumbar'], sets:1},
+]};
+const CIRCUIT_F1 = {block:'Bloque principal', circuit:true, items:[
+  {n:'Sentadilla a silla', d:'10 reps', c:['Bajar hasta rozar la silla y subir','Rodillas alineadas con los pies, que no caigan hacia dentro']},
+  {n:'Clamshell con goma', d:'12 por lado', c:['De lado, caderas y rodillas a 90°, goma sobre las rodillas','Abrir la rodilla de arriba sin girar la pelvis hacia atrás','Mejor ratio glúteo medio / TFL de todas las variantes'], side:true},
+  {n:'Bird-dog', d:'8 por lado', c:['Extender brazo y pierna contraria, mantener 3 s','Que no se caiga la cadera'], side:true},
+  {n:'Dead bug con talón', d:'8 por lado', c:['Caderas y rodillas a 90°, bajar una pierna a tocar el talón','Lumbar pegada al suelo todo el rato'], side:true, core:true},
+  {n:'Puente con abducción', d:'12 reps', c:['Goma en las rodillas, empujando hacia fuera todo el movimiento']},
+  {n:'Plancha lateral de rodillas', d:'20 s por lado', c:['Apoyo en antebrazo y rodillas','Versión McGill: exigente para el oblicuo, poco compresiva'], side:true, timer:20, core:true},
+]};
+const COOL_F1 = {block:'Vuelta a la calma', items:[
+  {n:'Deslizamiento neural ciático', d:'10 por lado', c:['Sentada, pierna estirada: estirar rodilla + mirar arriba','Doblar rodilla + barbilla al pecho al volver','No es un estiramiento: nunca hasta el tirón'], sets:1, side:true},
+  {n:'Figura 4 tumbada', d:'30 s por lado', c:['Sensación de estiramiento leve, nunca dolor','Saltar este ejercicio si hay brote'], sets:1, side:true, timer:30},
+  {n:'Respiración diafragmática', d:'6 respiraciones', c:['Lentas, alargando la exhalación'], sets:1},
+]};
+
+const WARM_F2 = {block:'Calentamiento', items:[
+  {n:'CARs de cadera de pie', d:'5 por lado', c:['Sujeta a la pared, sin que se mueva la pelvis'], sets:1, side:true},
+  {n:'Puente de glúteo', d:'12 reps', c:['Exhalar al subir'], sets:1},
+  {n:'Paseo lateral con goma', d:'10 pasos por dirección', c:['Goma sobre las rodillas, media sentadilla'], sets:1},
+  {n:'Gato-camello', d:'8 ciclos', c:['Lento y controlado'], sets:1},
+]};
+
+const SESSIONS = {
+  '1A':[WARM_F1, CIRCUIT_F1, COOL_F1],
+  '1B':[WARM_F1, CIRCUIT_F1, COOL_F1],
+  '2A':[WARM_F2, {block:'Fuerza — tren inferior', items:[
+    {n:'Split squat', d:'3 × 8 por pierna', c:['Pie de atrás en el suelo, sujetarse a una silla al principio','Entrena el control de la rodilla en el plano frontal','El ejercicio central del programa para el piramidal'], side:true},
+    {n:'Puente a una pierna', d:'3 × 10 por lado', c:['Que la pelvis no caiga del lado libre'], side:true},
+    {n:'Abducción en decúbito lateral', d:'3 × 15 por lado', c:['Pierna de arriba recta y ligeramente atrás','La que más activación de glúteo medio genera','Goma en los tobillos cuando sea fácil'], side:true},
+    {n:'Peso muerto rumano a 1 pierna', d:'3 × 8 por lado', c:['Sin peso o con goma bajo el pie','Espalda recta, bisagra de cadera, rodilla algo flexionada'], side:true},
+    {n:'Dead bug completo', d:'3 × 10 por lado', c:['Brazo y pierna contrarios bajando a la vez','Solo si no aparece el cono abdominal'], side:true, core:true},
+    {n:'Plancha lateral completa', d:'3 × 25 s por lado', c:['Apoyo en los pies','Volver a rodillas si cede la cadera'], side:true, timer:25, core:true},
+  ]}],
+  '2B':[WARM_F2, {block:'Fuerza — empuje y tracción', items:[
+    {n:'Sentadilla profunda controlada', d:'3 × 12', c:['Bajar en 3 s, subir en 1 s','Tan abajo como pueda sin que la pelvis se meta hacia dentro']},
+    {n:'Flexiones inclinadas', d:'3 × 8-10', c:['Manos en la encimera o el respaldo del sofá','Bajar la inclinación conforme mejore']},
+    {n:'Remo con goma', d:'3 × 12', c:['Goma anclada a la puerta o pisada','Juntar omóplatos, sin encoger hombros']},
+    {n:'Paseo lateral con goma', d:'3 × 12 pasos por dirección', c:['Media sentadilla mantenida','Que la goma no gane nunca']},
+    {n:'Pallof press', d:'3 × 10 por lado', c:['Goma anclada al lateral, a la altura del pecho','Empujar al frente resistiendo la rotación'], side:true, core:true},
+    {n:'Curl-up de McGill', d:'3 × 8', c:['Una rodilla doblada, manos bajo la lumbar','Levantar solo cabeza y hombros unos centímetros, 3 s','Validado por ECA: no empeora la diástasis'], core:true},
+  ]}],
+  '3A':[WARM_F2, {block:'Función — tren inferior', items:[
+    {n:'Sentadilla búlgara', d:'3 × 8 por pierna', c:['Pie de atrás elevado en el sofá','Tronco ligeramente adelante, sin dolor en el glúteo'], side:true},
+    {n:'Step-up', d:'3 × 10 por pierna', c:['A una silla firme o escalón','Subir empujando con el talón, bajar controlando'], side:true},
+    {n:'Puente a una pierna', d:'3 × 10 por lado', c:['Pelvis nivelada'], side:true},
+    {n:'Abducción en decúbito lateral', d:'3 × 15 por lado', c:['Con goma en los tobillos'], side:true},
+    {n:'Farmer\'s carry asimétrico', d:'3 × 30 s', c:['Peso en un solo lado: garrafa de agua o una de las niñas','Es el gesto que más repite en su vida diaria','Hombros nivelados, sin inclinarse'], timer:30},
+    {n:'Plancha lateral completa', d:'3 × 30 s por lado', c:['Apoyo en los pies'], side:true, timer:30, core:true},
+  ]}],
+  '3B':[WARM_F2, {block:'Función — empuje y tracción', items:[
+    {n:'Sentadilla a 1 pierna asistida', d:'3 × 6 por pierna', c:['Sujetándose al marco de una puerta','Bajar solo hasta donde controle la rodilla'], side:true},
+    {n:'Flexiones con rodillas apoyadas', d:'3 × 8', c:['En el suelo, cuerpo en línea de rodillas a hombros']},
+    {n:'Remo con goma', d:'3 × 12', c:['Juntar omóplatos']},
+    {n:'Paseo lateral con goma', d:'3 × 12 pasos por dirección', c:['Que la goma no gane nunca']},
+    {n:'Pallof press', d:'3 × 10 por lado', c:['Resistir la rotación, no empujar fuerte'], side:true, core:true},
+    {n:'Curl-up de McGill', d:'3 × 8', c:['Mantener 3 s arriba'], core:true},
+  ]}],
+};
+
+const MOBILITY = [
+  {n:'CARs de cadera de pie', d:'5 por lado', c:['Rodilla arriba → abrir al lado → rotar el pie hacia arriba → llevar atrás','Lento, sin que se mueva la pelvis'], side:true},
+  {n:'90/90, rotación lado a lado', d:'10 cambios', c:['Una pierna delante en rotación externa, la otra al lado en interna','Pasar de un lado a otro sin ayudarse mucho con las manos']},
+  {n:'90/90 — mantener', d:'60 s por lado', c:['Inclinarse sobre la pierna de delante','Respirar, no forzar'], timer:60, side:true},
+  {n:'90/90 — PAILs', d:'10 s por lado', c:['Empujar la rodilla contra el suelo al 50-70%','Sin dejar de respirar'], timer:10, side:true},
+  {n:'90/90 — RAILs', d:'10 s por lado', c:['Ahora intentar levantar activamente esa rodilla del suelo','Esto es lo que convierte el estiramiento en movilidad utilizable'], timer:10, side:true},
+  {n:'Psoas — posición del caballero', d:'45 s por lado', c:['Meter el coxis hacia dentro ANTES de avanzar','Sin eso se estira la lumbar en vez del psoas'], timer:45, side:true},
+  {n:'Rana / balanceo de aductores', d:'10 balanceos', c:['Cuadrupedia con rodillas bien abiertas','Mecerse atrás y adelante']},
+  {n:'Apertura torácica', d:'8 por lado', c:['De lado, rodillas a 90°, abrir el brazo de arriba girando el tórax'], side:true},
+  {n:'Deslizamiento neural ciático', d:'10 por lado', c:['Estirar rodilla + mirar arriba, doblar rodilla + barbilla abajo','Fluido, nunca hasta el tirón'], side:true},
+];
+
+const FLARE = [
+  {days:'Días 1-3', title:'Calmar', items:['Respiración diafragmática, 2 veces al día','Deslizamientos neurales suaves, 10 reps, 2 veces al día','Caminar corto y frecuente','Cambiar de postura cada 20-30 min'], stop:'Sin sesiones A ni B. Pero no reposo absoluto: mantenerse en movimiento es la recomendación estándar.'},
+  {days:'Días 4-7', title:'Reactivar', items:['Calentamiento de Fase 1 completo','Clamshell sin goma, 12 por lado','Puente de glúteo, 12 reps'], stop:'Nada de carga ni gomas todavía.'},
+  {days:'Semana 2', title:'Volver', items:['Fase 1 completa, 2 vueltas del circuito','Movilidad sin el estiramiento de figura 4'], stop:'Si a las 2 semanas está bien, retomar donde lo dejó.'},
+];
+
+/* ============================================================
+   ESTADO
+   ============================================================ */
+const KEY='programa-mellizas-v1';
+let S={sessions:[],flare:null,gate2:false,gate3:false};
+let mem=null;
+
+async function load(){
+  try{const r=await window.storage.get(KEY); if(r&&r.value) S={...S,...JSON.parse(r.value)};}
+  catch(e){ if(mem) S={...S,...mem}; }
+}
+async function save(){
+  mem=S;
+  try{ await window.storage.set(KEY, JSON.stringify(S)); }catch(e){}
+}
+
+/* progreso: 2 sesiones = 1 semana */
+function week(){ return Math.min(12, Math.floor(S.sessions.length/2)+1); }
+function phase(){ const w=week(); return w<=3?1:w<=9?2:3; }
+function nextLetter(){ return S.sessions.length%2===0?'A':'B'; }
+function roundsF1(){ return week()===1?2:3; }
+function flareDay(){ if(!S.flare) return 0; return Math.floor((Date.now()-S.flare)/86400000)+1; }
+function flareStage(){ const d=flareDay(); return d<=3?0:d<=7?1:2; }
+function programPct(){ return Math.max(0,Math.min(100, Math.round((S.sessions.length/24)*100))); }
+
+/* ============================================================
+   CONSTRUCCIÓN DE LA SESIÓN
+   ============================================================ */
+function buildSteps(key){
+  const blocks=SESSIONS[key]; const out=[];
+  blocks.forEach(b=>{
+    if(b.circuit){
+      const R=roundsF1();
+      for(let r=1;r<=R;r++) b.items.forEach(it=>out.push({...it, block:b.block, round:`Vuelta ${r} de ${R}`, sets:1}));
+    } else {
+      b.items.forEach(it=>out.push({...it, block:b.block, sets:it.sets||3}));
+    }
+  });
+  return out;
+}
+
+/* ============================================================
+   YOUTUBE — tutorial rápido por ejercicio
+   ============================================================ */
+function ytUrl(name){
+  const q=encodeURIComponent(name+' ejercicio técnica tutorial');
+  return `https://www.youtube.com/results?search_query=${q}`;
+}
+
+/* ============================================================
+   ICONOS
+   ============================================================ */
+function icon(name){
+  if(name==='play') return '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>';
+  const M={
+    home:'<path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v9a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-9"/><path d="M9.5 20v-6h5v6"/>',
+    activity:'<path d="M3 12a9 9 0 1 1 3 6.7"/><path d="M3 21v-5h5"/>',
+    chart:'<path d="M4 20V10"/><path d="M12 20V4"/><path d="M20 20v-7"/>',
+    list:'<path d="M9 6h11"/><path d="M9 12h11"/><path d="M9 18h11"/><path d="M4 6h.01"/><path d="M4 12h.01"/><path d="M4 18h.01"/>',
+    alert:'<path d="M12 9v4"/><path d="M12 17h.01"/><path d="M10.3 3.9 2.5 18a1.5 1.5 0 0 0 1.3 2.2h16.4a1.5 1.5 0 0 0 1.3-2.2L13.7 3.9a1.5 1.5 0 0 0-2.6 0Z"/>',
+  };
+  return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${M[name]}</svg>`;
+}
+
+/* ============================================================
+   RENDER
+   ============================================================ */
+const app=document.getElementById('app');
+let view='home', run=null, sheet=null;
+
+function h(html){ return html; }
+function esc(s){ return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+
+function render(){
+  if(view==='home') return renderHome();
+  if(view==='run') return renderRun();
+  if(view==='log') return renderLog();
+  if(view==='mob') return renderMob();
+  if(view==='hist') return renderHist();
+  if(view==='flare') return renderFlare();
+  if(view==='rules') return renderRules();
+}
+
+/* ---------- barra de navegación inferior ---------- */
+function tabbar(active){
+  const tabs=[['home','Inicio','home'],['mob','Movilidad','activity'],['hist','Historial','chart'],['rules','Reglas','list']];
+  return `<div class="tabbar">${tabs.map(([id,label,ic])=>
+    `<button class="tab ${active===id?'on':''}" data-go="${id}" aria-label="${label}" aria-current="${active===id?'page':'false'}">${icon(ic)}<span>${label}</span></button>`
+  ).join('')}</div>`;
+}
+
+/* ---------- HOME ---------- */
+function renderHome(){
+  const w=week(), p=phase(), L=nextLetter();
+  const pct=[Math.min(100,(w/3)*100), w<4?0:Math.min(100,((w-3)/6)*100), w<10?0:Math.min(100,((w-9)/3)*100)];
+  const names={1:'Reconexión',2:'Fuerza',3:'Función'};
+  const subs={1:'Recuperar el control de presión y activar el glúteo medio',2:'Construir fuerza real en cadera, core y tren superior',3:'Unipodal y cargas de la vida real'};
+
+  let flareHTML='';
+  if(S.flare){
+    const st=FLARE[flareStage()];
+    flareHTML=`<div class="flarebar"><b>Protocolo de brote — ${st.days}</b><p>${st.title}. Las sesiones A y B están en pausa. ${esc(st.stop)}</p></div>`;
+  }
+
+  app.innerHTML=`<div class="screen">
+    <div class="topbar">
+      <div><div class="eyebrow">Programa</div><div style="font-family:var(--display);font-weight:700;font-size:19px;margin-top:2px">12 semanas en casa</div></div>
+      <div class="weekchip">SEM ${w}/12</div>
+    </div>
+
+    ${flareHTML}
+
+    ${S.flare?`
+      <button class="cta" data-go="flare">Ver el protocolo de hoy</button>
+      <button class="cta ghost" data-exitflare>Ya estoy bien — retomar el programa</button>
+    `:`
+      <div class="today">
+        <div class="todayhead">
+          <div>
+            <div class="lab">Hoy toca</div>
+            <h1 class="gradtext">Sesión ${L}</h1>
+            <div class="sub">Fase ${p} · ${names[p]}</div>
+          </div>
+          <div class="ring" style="--p:${programPct()}"><span>${programPct()}%</span></div>
+        </div>
+        <div class="metarow">
+          <span class="pill">${p===1?'~30 MIN':'~30 MIN'}</span>
+          <span class="pill">${p===1?roundsF1()+' VUELTAS':'3 SERIES'}</span>
+          <span class="pill">GOMA + SILLA</span>
+        </div>
+      </div>
+      <button class="cta" data-go="run">Empezar sesión</button>
+    `}
+
+    <div class="bento">
+      <button class="tile wide" data-go="mob">
+        <div class="ic">${icon('activity')}</div>
+        <div><span class="n">Movilidad</span><span class="d">12-15 min · caderas</span></div>
+      </button>
+      <button class="tile" data-go="hist">
+        <div class="ic">${icon('chart')}</div>
+        <div><span class="n">Historial</span><span class="d">${S.sessions.length} ${S.sessions.length===1?'sesión':'sesiones'}</span></div>
+      </button>
+      <button class="tile" data-go="rules">
+        <div class="ic">${icon('list')}</div>
+        <div><span class="n">Reglas</span><span class="d">Semáforo y qué evitar</span></div>
+      </button>
+      <button class="tile flare-tile" data-go="flare">
+        <div class="ic">${icon('alert')}</div>
+        <div><span class="n">Brote</span><span class="d">Qué hacer si vuelve</span></div>
+      </button>
+    </div>
+
+    <div class="phases">
+      ${[1,2,3].map(i=>`<div class="ph ${p===i?'on':''}"><div class="bar"><i style="width:${pct[i-1]}%"></i></div><div class="t">F${i} ${names[i]}</div></div>`).join('')}
+    </div>
+
+    <div class="note">El programa avanza al completar sesiones, no por calendario. Si para una semana, no pierde el sitio.</div>
+  </div>${tabbar('home')}`;
+  wire();
+}
+
+/* ---------- RUNNER ---------- */
+function startRun(mode){
+  const key = mode==='mob' ? 'MOB' : phase()+nextLetter();
+  run={ mode, key, steps: mode==='mob'?MOBILITY.map(x=>({...x,block:'Movilidad',sets:1})):buildSteps(key),
+        i:0, done:{}, t0:Date.now(), timer:null, tleft:0, tmode:null };
+  view='run'; render();
+}
+
+function renderRun(){
+  const st=run.steps[run.i], total=run.steps.length;
+  const doneSets=run.done[run.i]||0;
+  const allSets=doneSets>=st.sets;
+
+  const rail=run.steps.map((_,i)=>`<i class="${i<run.i?'done':i===run.i?'now':''}"></i>`).join('');
+
+  let timerHTML='';
+  if(run.tmode){
+    timerHTML=`<div class="timer active">
+      <div class="num ${run.tmode==='rest'?'rest':''}">${String(Math.floor(run.tleft/60)).padStart(2,'0')}:${String(run.tleft%60).padStart(2,'0')}</div>
+      <div class="lab">${run.tmode==='rest'?'Descanso':'Mantener posición'}</div>
+      <div class="acts"><button data-stoptimer>Saltar</button></div>
+    </div>`;
+  } else if(st.timer){
+    timerHTML=`<div class="timer">
+      <div class="num">${String(Math.floor(st.timer/60)).padStart(2,'0')}:${String(st.timer%60).padStart(2,'0')}</div>
+      <div class="lab">${st.side?'Por cada lado':'Mantener'}</div>
+      <div class="acts"><button data-starttimer="${st.timer}">Iniciar</button></div>
+    </div>`;
+  }
+
+  let setsHTML='';
+  if(st.sets>1){
+    setsHTML=`<div class="sets">${Array.from({length:st.sets},(_,i)=>
+      `<button class="setbtn ${i<doneSets?'done':''}" data-set="${i+1}">SERIE ${i+1}</button>`).join('')}</div>`;
+  }
+
+  const coreWarn = st.core ? `<div class="warn"><b>Comprobar el abdomen.</b> Si la línea media se hunde en un canal o sobresale en una cresta, este ejercicio es demasiado para hoy. Volver a la versión más fácil.</div>` : '';
+
+  app.innerHTML=`<div class="screen">
+    <div class="rail">${rail}</div>
+    <div class="blocklab">
+      <div class="eyebrow">${esc(st.block)}${st.round?' · '+esc(st.round):''}</div>
+      <button class="eyebrow" data-quit style="color:var(--dim)">SALIR</button>
+    </div>
+
+    <div class="exwrap">
+      <div class="exnum">${run.i+1} / ${total}</div>
+      <div class="exname gradtext">${esc(st.n)}</div>
+      <div class="doserow">
+        <div class="dose">${esc(st.d)}</div>
+        <a class="vidbtn" href="${ytUrl(st.n)}" target="_blank" rel="noopener" aria-label="Ver vídeo tutorial de ${esc(st.n)}">${icon('play')}Vídeo</a>
+      </div>
+      <ul class="cues">${st.c.map(c=>`<li>${esc(c)}</li>`).join('')}</ul>
+      ${coreWarn}
+      ${timerHTML}
+      ${setsHTML}
+    </div>
+
+    <div class="nav">
+      <button class="prev" data-prev aria-label="Ejercicio anterior" ${run.i===0?'disabled':''}>←</button>
+      <button class="next" data-next ${st.sets>1&&!allSets?'disabled':''}>
+        ${run.i===total-1?'Terminar':'Siguiente'}
+      </button>
+    </div>
+  </div>${symrail()}`;
+  wire();
+}
+
+function symrail(){
+  return `<div class="symrail">
+    <div class="q">¿Cómo va?</div>
+    <button class="sym g" data-sym="g">BIEN</button>
+    <button class="sym a" data-sym="a">MOLESTA</button>
+    <button class="sym r" data-sym="r">BAJA<br>A LA PIERNA</button>
+  </div>`;
+}
+
+function symSheet(lvl){
+  const V={
+    g:{cls:'g',t:'Seguir',b:'Molestia en el glúteo de 3/10 o menos que no baja de la rodilla es normal en la readaptación. Continuar la sesión.',act:'Seguir entrenando'},
+    a:{cls:'a',t:'Bajar una serie',b:'Molestia de 4-5/10 o rigidez que dura hasta el día siguiente indica demasiado volumen. Quitar una serie de aquí en adelante y repetir esta semana antes de progresar.',act:'Entendido, bajar carga'},
+    r:{cls:'r',t:'Parar la sesión',b:'Dolor que baja por la pierna, hormigueo o entumecimiento significa que el nervio está irritado. Parar aquí y entrar en el protocolo de brote: 3 días de calma activa, sin reposo absoluto.',act:'Entrar en protocolo de brote'}
+  }[lvl];
+  sheet={lvl,V};
+  const el=document.createElement('div');
+  el.className='veil'; el.dataset.veil='1';
+  el.innerHTML=`<div class="sheet">
+    <div class="eyebrow">Semáforo de síntomas</div>
+    <div class="verdict ${V.cls}" style="margin-top:12px"><b>${V.t}</b>${V.b}</div>
+    <button class="cta ${lvl==='r'?'':'ghost'}" data-symok="${lvl}">${V.act}</button>
+    ${lvl==='r'?'<button class="cta ghost" data-close>Cancelar</button>':''}
+  </div>`;
+  document.body.appendChild(el);
+  wire();
+}
+
+/* ---------- LOG POST-SESIÓN ---------- */
+let draft={pain:null,doming:null,domingEx:'',notes:''};
+function renderLog(){
+  const exs=run?run.steps.map(s=>s.n).filter((v,i,a)=>a.indexOf(v)===i):[];
+  app.innerHTML=`<div class="screen">
+    <div class="eyebrow">Sesión terminada</div>
+    <h1 style="margin:8px 0 6px">Tres preguntas</h1>
+    <p style="color:var(--dim);font-size:14.5px;margin-bottom:26px;line-height:1.5">Sin registro es muy fácil confundir agujetas normales con una progresión demasiado rápida.</p>
+
+    <div class="field">
+      <label>Dolor de glúteo o pierna (0-10)</label>
+      <div class="scale">${Array.from({length:11},(_,i)=>`<button data-pain="${i}" class="${draft.pain===i?'on':''}">${i}</button>`).join('')}</div>
+    </div>
+
+    <div class="field">
+      <label>¿Hubo abombamiento abdominal?</label>
+      <div class="choice">
+        <button data-dom="no" class="${draft.doming==='no'?'on':''}">No</button>
+        <button data-dom="si" class="${draft.doming==='si'?'on':''}">Sí</button>
+      </div>
+      ${draft.doming==='si'?`<select data-domex style="margin-top:10px">
+        <option value="">¿En qué ejercicio?</option>
+        ${exs.map(e=>`<option value="${esc(e)}" ${draft.domingEx===e?'selected':''}>${esc(e)}</option>`).join('')}
+      </select>`:''}
+    </div>
+
+    <div class="field">
+      <label>Notas (opcional)</label>
+      <textarea rows="3" data-notes placeholder="Qué costó, qué salió mejor que la vez anterior…">${esc(draft.notes)}</textarea>
+    </div>
+
+    <button class="cta" data-savelog ${draft.pain===null||!draft.doming?'disabled style="opacity:.4"':''}>Guardar y terminar</button>
+  </div>`;
+  wire();
+}
+
+/* ---------- MOVILIDAD ---------- */
+function renderMob(){
+  app.innerHTML=`<div class="screen">
+    <button class="back" data-go="home">← INICIO</button>
+    <div class="eyebrow">Rutina de movilidad</div>
+    <h1 style="margin:8px 0 6px">Caderas</h1>
+    <p style="color:var(--dim);font-size:14.5px;line-height:1.5;margin-bottom:22px">12-15 min. Al final de la sesión o en días sueltos. Idealmente 3 veces por semana.</p>
+
+    ${MOBILITY.map((m,i)=>`<div class="logrow">
+      <div class="dot" style="background:var(--ink3)"></div>
+      <div class="info"><b>${esc(m.n)}</b><span>${esc(m.c[0])}</span></div>
+      <div class="p">${esc(m.d)}</div>
+      <a class="vidicon" href="${ytUrl(m.n)}" target="_blank" rel="noopener" aria-label="Ver vídeo de ${esc(m.n)}">${icon('play')}</a>
+    </div>`).join('')}
+
+    <button class="cta" data-go="mobrun" style="margin-top:22px">Empezar guiada</button>
+    <div class="note"><b style="color:var(--bone)">Sobre estirar el piramidal:</b> la figura 4 se puede usar, pero suave (3/10 máximo) y nunca durante un brote. Si el nervio ya está irritado, estirar el músculo que lo rodea añade tensión a un nervio sensibilizado.</div>
+  </div>${tabbar('mob')}`;
+  wire();
+}
+
+/* ---------- HISTORIAL ---------- */
+function renderHist(){
+  const L=[...S.sessions].reverse();
+  const pains=S.sessions.slice(-14).map(s=>s.pain);
+  const max=Math.max(3,...pains);
+  app.innerHTML=`<div class="screen">
+    <button class="back" data-go="home">← INICIO</button>
+    <div class="eyebrow">Historial</div>
+    <h1 style="margin:8px 0 18px">${S.sessions.length} sesiones</h1>
+
+    ${pains.length>1?`
+      <div class="eyebrow">Dolor por sesión (últimas ${pains.length})</div>
+      <div class="spark">${pains.map(p=>`<i style="height:${Math.max(4,(p/max)*100)}%;background:${p>=6?'var(--rust)':p>=4?'var(--amber)':'var(--sage)'}"></i>`).join('')}</div>
+      <div class="hr"></div>`:''}
+
+    ${L.length?L.map(s=>`<div class="logrow">
+      <div class="dot" style="background:${s.pain>=6?'var(--rust)':s.pain>=4?'var(--amber)':'var(--sage)'}"></div>
+      <div class="info"><b>Fase ${s.phase} · Sesión ${s.letter}</b><span>${s.date}${s.doming==='si'?' · abombamiento en '+esc(s.domingEx||'un ejercicio'):''}${s.notes?' · '+esc(s.notes.slice(0,44)):''}</span></div>
+      <div class="p">${s.pain}/10</div>
+    </div>`).join(''):'<div class="empty">Todavía no hay sesiones registradas.<br>Al terminar la primera aparecerá aquí.</div>'}
+  </div>${tabbar('hist')}`;
+  wire();
+}
+
+/* ---------- BROTE ---------- */
+function renderFlare(){
+  const active=!!S.flare, stage=active?flareStage():-1;
+  app.innerHTML=`<div class="screen">
+    <button class="back" data-go="home">← INICIO</button>
+    <div class="eyebrow">Protocolo de brote</div>
+    <h1 style="margin:8px 0 6px">Cuando vuelve</h1>
+    <p style="color:var(--dim);font-size:14.5px;line-height:1.5;margin-bottom:22px">Los episodios cada varias semanas probablemente no desaparezcan de golpe. Esto es lo que se hace.</p>
+
+    ${FLARE.map((f,i)=>`<div style="border:1px solid ${stage===i?'var(--amber)':'var(--line)'};border-radius:16px;padding:18px;margin-bottom:12px;background:${stage===i?'rgba(232,163,61,.08)':'var(--ink2)'}">
+      <div class="eyebrow" style="color:${stage===i?'var(--amber)':'var(--dim)'}">${f.days}${stage===i?' · AHORA':''}</div>
+      <h2 style="margin:7px 0 11px">${f.title}</h2>
+      <ul class="cues">${f.items.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>
+      <div class="note" style="margin-top:2px">${esc(f.stop)}</div>
+    </div>`).join('')}
+
+    <div class="warn" style="margin-top:8px"><b>El agravante principal es estar sentada.</b> En una casa con dos niñas de 3 años suele haber mucho tiempo en el suelo en posturas asimétricas. Cambiar de postura cada 20-30 min hace más por esto que cualquier estiramiento.</div>
+
+    ${active
+      ? `<button class="cta ghost" data-exitflare>Ya estoy bien — retomar el programa</button>`
+      : `<button class="cta ghost" data-startflare>Estoy en brote — activar protocolo</button>`}
+  </div>${tabbar('')}`;
+  wire();
+}
+
+/* ---------- REGLAS ---------- */
+function renderRules(){
+  const avoid=[
+    ['Elevación de piernas rectas / tijeras','En el meta-análisis en red empeoraron la distancia inter-recto'],
+    ['Crunch rápido en series largas','No por el crunch en sí, sino por la velocidad sin control de presión'],
+    ['Plancha frontal antes de la Fase 2','Salió entre lo menos eficaz para diástasis y es de las que más abombamiento provoca'],
+    ['Trabajo aislado solo de transverso','Uno de los peores resultados. Hay que integrarlo, no aislarlo'],
+    ['Estirar el piramidal en brote','Añade tensión a un nervio ya irritado'],
+    ['Aguantar la respiración en el esfuerzo','Dispara la presión contra una línea alba y un suelo pélvico debilitados'],
+    ['Correr o saltar antes de la Fase 3','El impacto es la demanda más alta para el suelo pélvico'],
+  ];
+  app.innerHTML=`<div class="screen">
+    <button class="back" data-go="home">← INICIO</button>
+    <div class="eyebrow">Reglas</div>
+    <h1 style="margin:8px 0 20px">Antes de entrenar</h1>
+
+    <h2 style="margin-bottom:12px">El test del abombamiento</h2>
+    <p style="color:#CBD8D5;font-size:15px;line-height:1.55;margin-bottom:14px">Tumbada boca arriba, rodillas dobladas. Levantar cabeza y hombros del suelo y mirarse el abdomen.</p>
+    <div class="verdict g" style="margin-bottom:10px"><b>Plano y firme</b>Puede progresar al ritmo normal del programa.</div>
+    <div class="verdict r" style="margin-bottom:20px"><b>Canal o cresta en la línea media</b>Hay pérdida de control de la presión. Quedarse en Fase 1 hasta que desaparezca.</div>
+
+    <div class="hr"></div>
+    <h2 style="margin-bottom:14px">La respiración es parte del ejercicio</h2>
+    <p style="color:#CBD8D5;font-size:15px;line-height:1.55;margin-bottom:8px">Exhalar en el esfuerzo, siempre. En la exhalación, un cierre suave del suelo pélvico, sin apretar glúteos.</p>
+    <div class="note" style="margin-bottom:4px">No es un extra: en la evidencia, la combinación de respiración + suelo pélvico + abdominal es lo que marca la diferencia frente al ejercicio abdominal a secas.</div>
+
+    <div class="hr"></div>
+    <h2 style="margin-bottom:14px">Qué evitar</h2>
+    ${avoid.map(a=>`<div class="logrow"><div class="dot" style="background:var(--rust)"></div><div class="info"><b>${esc(a[0])}</b><span>${esc(a[1])}</span></div></div>`).join('')}
+
+    <div class="note" style="margin-top:22px">Esto es un programa de acondicionamiento, no un tratamiento médico. Conviene enseñárselo a su fisio antes de empezar, sobre todo para confirmar que la fase piriforme está estable.</div>
+  </div>${tabbar('rules')}`;
+  wire();
+}
+
+/* ============================================================
+   TEMPORIZADOR
+   ============================================================ */
+function startTimer(sec,mode){
+  clearInterval(run.timer);
+  run.tleft=sec; run.tmode=mode;
+  run.timer=setInterval(()=>{
+    run.tleft--;
+    if(run.tleft<=0){ clearInterval(run.timer); run.timer=null; run.tmode=null; beep(); }
+    render();
+  },1000);
+  render();
+}
+function stopTimer(){ clearInterval(run.timer); run.timer=null; run.tmode=null; render(); }
+function beep(){
+  try{
+    const c=new (window.AudioContext||window.webkitAudioContext)();
+    const o=c.createOscillator(), g=c.createGain();
+    o.connect(g); g.connect(c.destination); o.frequency.value=660; o.type='sine';
+    g.gain.setValueAtTime(.16,c.currentTime); g.gain.exponentialRampToValueAtTime(.001,c.currentTime+.45);
+    o.start(); o.stop(c.currentTime+.45);
+  }catch(e){}
+}
+
+/* ============================================================
+   EVENTOS
+   ============================================================ */
+function wire(){
+  document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>{
+    const t=b.dataset.go;
+    if(t==='run'){ startRun('session'); return; }
+    if(t==='mobrun'){ startRun('mob'); return; }
+    view=t; render();
+  });
+
+  const q=(s,f)=>document.querySelectorAll(s).forEach(f);
+
+  q('[data-quit]',b=>b.onclick=()=>{ if(run&&run.timer)clearInterval(run.timer); run=null; view='home'; render(); });
+  q('[data-prev]',b=>b.onclick=()=>{ if(run.i>0){ if(run.timer)stopTimer(); run.i--; render(); } });
+  q('[data-next]',b=>b.onclick=()=>{
+    if(run.timer)clearInterval(run.timer); run.timer=null; run.tmode=null;
+    if(run.i<run.steps.length-1){ run.i++; render(); }
+    else finish();
+  });
+  q('[data-set]',b=>b.onclick=()=>{
+    const n=+b.dataset.set;
+    run.done[run.i]=run.done[run.i]===n?n-1:n;
+    const st=run.steps[run.i];
+    if(run.done[run.i]<st.sets && run.done[run.i]===n) startTimer(65,'rest'); else render();
+  });
+  q('[data-starttimer]',b=>b.onclick=()=>startTimer(+b.dataset.starttimer,'hold'));
+  q('[data-stoptimer]',b=>b.onclick=stopTimer);
+
+  q('[data-sym]',b=>b.onclick=()=>symSheet(b.dataset.sym));
+  q('[data-close]',b=>b.onclick=closeSheet);
+  q('[data-veil]',v=>v.onclick=e=>{ if(e.target===v) closeSheet(); });
+  q('[data-symok]',b=>b.onclick=()=>{
+    const l=b.dataset.symok; closeSheet();
+    if(l==='r'){ S.flare=Date.now(); save(); if(run&&run.timer)clearInterval(run.timer); run=null; view='flare'; render(); }
+  });
+
+  q('[data-startflare]',b=>b.onclick=()=>{ S.flare=Date.now(); save(); render(); });
+  q('[data-exitflare]',b=>b.onclick=()=>{ S.flare=null; save(); view='home'; render(); });
+
+  q('[data-pain]',b=>b.onclick=()=>{ draft.pain=+b.dataset.pain; render(); });
+  q('[data-dom]',b=>b.onclick=()=>{ draft.doming=b.dataset.dom; render(); });
+  q('[data-domex]',s=>s.onchange=()=>{ draft.domingEx=s.value; });
+  q('[data-notes]',t=>t.oninput=()=>{ draft.notes=t.value; });
+  q('[data-savelog]',b=>b.onclick=saveLog);
+}
+function closeSheet(){ document.querySelectorAll('[data-veil]').forEach(v=>v.remove()); sheet=null; }
+
+function finish(){
+  if(run.mode==='mob'){ run=null; view='home'; render(); return; }
+  draft={pain:null,doming:null,domingEx:'',notes:''};
+  view='log'; render();
+}
+
+async function saveLog(){
+  if(draft.pain===null||!draft.doming) return;
+  S.sessions.push({
+    date:new Date().toLocaleDateString('es-ES',{day:'numeric',month:'short'}),
+    phase:phase(), letter:nextLetter(),
+    pain:draft.pain, doming:draft.doming, domingEx:draft.domingEx, notes:draft.notes.trim()
+  });
+  await save();
+  run=null; view='home'; render();
+}
+
+/* ============================================================
+   ARRANQUE
+   ============================================================ */
+(async()=>{ await load(); render(); })();
+</script>
+</body>
+</html>
