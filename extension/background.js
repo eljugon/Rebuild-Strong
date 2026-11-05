@@ -7,7 +7,7 @@
 const DEFAULTS = {
   // URL del chat de Vita. Si es una conversación/bot concreta (no la raíz),
   // solo se reutilizan pestañas cuya URL empiece por ella.
-  chatUrl: "https://grok.com/",
+  chatUrl: "https://grok.x.ai/",
   autoSubmit: true,   // false = solo pega el texto, no pulsa enviar
   activate: true,     // traer la pestaña de Grok al frente
   timeoutMs: 30000,   // espera máxima a que aparezca el campo de texto
@@ -58,7 +58,8 @@ async function record(entry) {
 
 function sameChat(tabUrl, chatUrl) {
   if (!tabUrl) return false;
-  const clean = (u) => u.split(/[?#]/)[0].replace(/\/+$/, "");
+  // grok.x.ai redirige a grok.com: se tratan como el mismo sitio
+  const clean = (u) => u.split(/[?#]/)[0].replace(/\/+$/, "").replace("://grok.x.ai", "://grok.com");
   const u = new URL(chatUrl);
   const isRoot = (u.pathname === "/" || u.pathname === "") && !u.search;
   // raíz → solo una pestaña en la raíz (chat nuevo), nunca una conversación ajena

@@ -13,8 +13,8 @@ todo funciona igual que antes (se copia al portapapeles).
 4. Pulsa **Cargar descomprimida** y elige la carpeta `extension/` del repo.
 5. Fija la extensión en la barra y ábrela (icono «R»):
    - **URL del chat de Vita**: pega la URL del chat o bot de Vita en Grok (p. ej. `https://grok.com/c/<id>`).
-     Con la raíz (`https://grok.com/`) se envía a un chat nuevo de Grok. En ese caso el mensaje empieza por
-     `@Vita · Salud y longevidad (agentId …)` para dirigirlo a Vita.
+     Por defecto es `https://grok.x.ai/` (la raíz, que redirige a grok.com): se envía a un chat nuevo de Grok,
+     y el mensaje empieza por `@Vita · Salud y longevidad (agentId …)` para dirigirlo a Vita.
    - Pulsa **Guardar**. Si la URL no es de grok.com, grok.x.ai ni x.com, el navegador te pedirá permiso para ese dominio.
    - Pulsa **Enviar prueba**: se abre o activa Grok y debe aparecer un mensaje de prueba enviado.
 6. Asegúrate de tener la **sesión iniciada en Grok** en ese navegador.
