@@ -102,11 +102,20 @@ Contrato entre la app (Rebuild Strong, `index.html`) y el agente **Vita · Salud
 
 ## Gancho de envío
 
-**Envío automático**: la extensión de [`extension/`](../extension/README.md) se registra como transporte
-y entrega el lote en el chat de Vita en Grok. El JSON llega compacto, en una sola línea, dentro de un bloque ```json```.
+**Por defecto** (iPhone, GitHub Pages, cualquier navegador sin la extensión), al aceptar la app hace
+`POST` del envelope JSON a `https://rebuild-strong-vita.eljugon.workers.dev/`
+(`Content-Type: application/json`). Ese Worker valida `schema: rebuild-strong.btwb-log-batch/v1`
+y reenvía el lote al webhook de Vita. La clave del webhook vive solo en el Worker; el cliente no lleva
+secrets ni `Authorization`. Respuesta no OK → la UI muestra **Error** con el estado HTTP y un recorte
+del cuerpo. Respuesta OK → **Enviado a Vita**. El Worker solo permite CORS desde
+`https://eljugon.github.io`; en `localhost` sin la extensión el navegador bloquea el POST.
 
-Sin extensión ni transporte, la app **copia al portapapeles** un mensaje dirigido a Vita (instrucciones +
-resumen + JSON) para pegar en su chat. Para conectar un envío automático:
+**Extensión de escritorio** ([`extension/`](../extension/README.md)): si está instalada, llama a
+`RebuildStrong.setVitaTransport` después del transporte por defecto y lo sustituye. El lote va al chat
+de Vita en Grok (JSON compacto, una línea, dentro de un bloque ```json```), sin pasar por el Worker.
+
+Si no queda ningún transporte (`setVitaTransport(null)`), la app **copia al portapapeles** un mensaje
+dirigido a Vita (instrucciones + resumen + JSON). Para conectar otro envío:
 
 ```js
 RebuildStrong.setVitaTransport(async envelope => {
