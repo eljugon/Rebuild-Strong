@@ -1,0 +1,30 @@
+{
+  "manifest_version": 3,
+  "name": "Rebuild Strong → Vita",
+  "version": "1.0.0",
+  "description": "Envía automáticamente los lotes de logs de Rebuild Strong al chat de Vita en Grok para que los registre en BTWB.",
+  "permissions": ["storage", "scripting"],
+  "host_permissions": [
+    "https://grok.com/*",
+    "https://grok.x.ai/*",
+    "https://x.com/*",
+    "http://localhost/*",
+    "http://127.0.0.1/*"
+  ],
+  "optional_host_permissions": ["https://*/*"],
+  "background": { "service_worker": "background.js" },
+  "action": { "default_popup": "popup.html", "default_title": "Rebuild Strong → Vita" },
+  "content_scripts": [
+    {
+      "matches": ["https://eljugon.github.io/Rebuild-Strong/*", "http://localhost/*", "http://127.0.0.1/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["https://eljugon.github.io/Rebuild-Strong/*", "http://localhost/*", "http://127.0.0.1/*"],
+      "js": ["page-bridge.js"],
+      "run_at": "document_idle",
+      "world": "MAIN"
+    }
+  ]
+}
