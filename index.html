@@ -635,8 +635,8 @@ function copyText(t){
 }
 
 /* ── Gancho de envío a Vita ──
-   Para conectar el envío real, registra un transporte:
-     RebuildStrong.setVitaTransport(async env => { …POST / bridge al agente…; return {msg:"Enviado a Vita"}; });
+   Transporte por defecto (más abajo): POST JSON al Worker de Cloudflare, que reenvía a Vita.
+   La extensión de escritorio llama a setVitaTransport más tarde y sustituye ese transporte.
    Sin transporte, se copia al portapapeles un mensaje listo para pegar en el chat de Vita.
    Siempre se emite window event "rebuildstrong:vita-batch" (detail = envelope) y se guarda en el outbox local. */
 const VitaBridge={
@@ -653,6 +653,18 @@ window.RebuildStrong={vita:VITA,buildEnvelope,vitaMessage,
   setVitaTransport(fn){ VitaBridge.transport=fn; },
   outbox(){ try{ return JSON.parse(localStorage.getItem(OUTBOX_KEY)||"[]"); }catch(e){ return []; } },
   resetDraft(w,d){ delete drafts[key(w,d)]; saveDrafts(true); }};
+
+/* iPhone / GitHub Pages: envío directo. La extensión (document_idle) puede sobrescribirlo. */
+const VITA_BRIDGE="https://rebuild-strong-vita.eljugon.workers.dev/";
+RebuildStrong.setVitaTransport(async env=>{
+  const r=await fetch(VITA_BRIDGE,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(env)});
+  if(!r.ok){
+    let snip="";
+    try{ snip=(await r.text()).replace(/\s+/g," ").trim().slice(0,160); }catch(e){}
+    throw new Error("HTTP "+r.status+(snip?" · "+snip:""));
+  }
+  return {msg:"Enviado a Vita"};
+});
 
 /* ── UI del panel ── */
 const LogUI={

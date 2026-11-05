@@ -2,8 +2,11 @@
 
 Extensión mínima de navegador (Manifest V3, sin dependencias) que hace que **«Aceptar y loguear todos»**
 llegue solo a Vita: abre o activa el chat de Vita en Grok, pega el mensaje (resumen + JSON del lote) y lo envía.
-No hace falta copiar ni pegar nada. La app sigue siendo 100 % estática. Si la extensión no está instalada,
-todo funciona igual que antes (se copia al portapapeles).
+No hace falta copiar ni pegar nada. La app sigue siendo 100 % estática. En el iPhone y en GitHub Pages,
+sin esta extensión, el lote sale por el transporte por defecto: `POST` a
+`https://rebuild-strong-vita.eljugon.workers.dev/` (la clave del webhook está en el Worker, no en el cliente).
+En el escritorio, si la extensión está instalada, sigue ganando: se registra más tarde con
+`setVitaTransport` y pega el mensaje en el chat de Grok. Es opcional.
 
 ## Instalación (Chrome / Edge / Brave)
 

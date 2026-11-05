@@ -43,9 +43,11 @@ El detalle de cada sesión incluye **Propuesta de logs**: la sesión se divide e
 (básicos, superseries, acondicionamiento/WOD), cada uno editable, y «Aceptar y loguear todos» marca la sesión
 como hecha y prepara el lote para el agente Vita. Contrato y gancho de envío: [`docs/vita-btwb-logs.md`](docs/vita-btwb-logs.md).
 
-**Envío automático a Vita**: instala la extensión de navegador de [`extension/`](extension/README.md)
-(Chrome/Edge → *Cargar descomprimida*). Con ella, al aceptar, el lote se pega y se envía solo en el chat de Vita
-en Grok, sin copiar y pegar. Sin la extensión, la app copia el mensaje al portapapeles como antes.
+**Envío automático a Vita**: al aceptar, la app hace `POST` del lote a
+`https://rebuild-strong-vita.eljugon.workers.dev/`, que lo reenvía a Vita. Así funciona en el iPhone y en
+GitHub Pages, sin extensión y sin pegar en el chat. En el escritorio, la extensión de
+[`extension/`](extension/README.md) es opcional: si está instalada, sustituye ese transporte y pega el
+mensaje en el chat de Vita en Grok.
 
 ## 🐂 Icono (pantalla de inicio)
 
@@ -55,12 +57,14 @@ original, centrado sobre fondo naranja con margen para las esquinas redondeadas 
 
 ## ✅ Cómo probar
 
-**Logs → Vita** (requiere la extensión, ver [`extension/README.md`](extension/README.md)):
-1. Instala la extensión (`chrome://extensions` → Modo desarrollador → *Cargar descomprimida* → `extension/`),
+**Logs → Vita** (el iPhone y GitHub Pages usan el Worker; la extensión de escritorio es opcional, ver [`extension/README.md`](extension/README.md)):
+1. Abre https://eljugon.github.io/Rebuild-Strong/, entra en una sesión y pulsa **Aceptar y loguear todos**.
+2. La sesión pasa a ✓ Hecha y la app muestra **Enviado a Vita** cuando el Worker acepta el lote.
+   Vita responde con el resultado de cada log en BTWB.
+3. En Chrome/Edge, si quieres el camino del chat de Grok en lugar del Worker: instala la extensión
+   (`chrome://extensions` → Modo desarrollador → *Cargar descomprimida* → `extension/`),
    ten la sesión iniciada en Grok y, en el popup, pon la URL del chat de Vita y pulsa «Enviar prueba».
-2. Abre https://eljugon.github.io/Rebuild-Strong/, entra en una sesión y pulsa **Aceptar y loguear todos**.
-3. La sesión pasa a ✓ Hecha, se abre o activa Grok, el mensaje (resumen + JSON) se envía solo, y la app muestra
-   «Enviado a Vita · N logs». Vita responde con el resultado de cada log en BTWB.
+   Con la extensión cargada, al aceptar se abre o activa Grok y el mensaje (resumen + JSON) se envía solo.
 
 **Icono de El Toro en el iPhone**:
 1. Si ya tenías la app en la pantalla de inicio con el icono «17», bórrala (iOS guarda el icono al añadirla).
