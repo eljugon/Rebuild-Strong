@@ -100,9 +100,12 @@ Contrato entre la app (Rebuild Strong, `index.html`) y el agente **Vita · Salud
    - Añadir `session.notes` (si existe) a las notas del primer log.
 3. Responder con un resumen por log (`seq` → ok / error) para que el usuario sepa qué quedó registrado.
 
-## Gancho de envío (sin MCP real todavía)
+## Gancho de envío
 
-Por defecto, sin transporte, la app **copia al portapapeles** un mensaje dirigido a Vita (instrucciones +
+**Envío automático**: la extensión de [`extension/`](../extension/README.md) se registra como transporte
+y entrega el lote en el chat de Vita en Grok. El JSON llega compacto, en una sola línea, dentro de un bloque ```json```.
+
+Sin extensión ni transporte, la app **copia al portapapeles** un mensaje dirigido a Vita (instrucciones +
 resumen + JSON) para pegar en su chat. Para conectar un envío automático:
 
 ```js

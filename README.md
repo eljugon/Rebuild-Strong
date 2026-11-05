@@ -43,6 +43,10 @@ El detalle de cada sesión incluye **Propuesta de logs**: la sesión se divide e
 (básicos, superseries, acondicionamiento/WOD), cada uno editable, y «Aceptar y loguear todos» marca la sesión
 como hecha y prepara el lote para el agente Vita. Contrato y gancho de envío: [`docs/vita-btwb-logs.md`](docs/vita-btwb-logs.md).
 
+**Envío automático a Vita**: instala la extensión de navegador de [`extension/`](extension/README.md)
+(Chrome/Edge → *Cargar descomprimida*). Con ella, al aceptar, el lote se pega y se envía solo en el chat de Vita
+en Grok, sin copiar y pegar. Sin la extensión, la app copia el mensaje al portapapeles como antes.
+
 ## ▶️ Run locally
 
 python3 -m http.server 8000
