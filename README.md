@@ -37,6 +37,12 @@ src/   data/          Program & exercises (JSON)   components/    UI building bl
 - Local storage + sync
 - App Store ready
 
+## 📝 Logs de sesión → BTWB (vía Vita)
+
+El detalle de cada sesión incluye **Propuesta de logs**: la sesión se divide en los logs reales de BTWB
+(básicos, superseries, acondicionamiento/WOD), cada uno editable, y «Aceptar y loguear todos» marca la sesión
+como hecha y prepara el lote para el agente Vita. Contrato y gancho de envío: [`docs/vita-btwb-logs.md`](docs/vita-btwb-logs.md).
+
 ## ▶️ Run locally
 
 python3 -m http.server 8000

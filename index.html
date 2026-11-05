@@ -131,6 +131,58 @@ h1{font-size:22px;line-height:1.2;margin:18px 0 6px;letter-spacing:-.02em}
   background:var(--panel2);border:1px solid var(--line);color:var(--tx);padding:10px 16px;border-radius:9px;
   font-size:13px;z-index:200;opacity:0;pointer-events:none;transition:opacity .18s}
 .toast.on{opacity:1}
+/* ── propuesta de logs (BTWB vía Vita) ── */
+.lp-h{display:flex;align-items:center;gap:8px;padding:11px 14px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.lp-h .cnt{font-family:var(--mono);font-size:11px;color:var(--dim);flex:1}
+.lp-h input[type=date]{background:var(--panel2);border:1px solid var(--line);color:var(--tx);border-radius:6px;
+  font-family:var(--mono);font-size:13px;padding:4px 6px;color-scheme:dark}
+.lnk{background:none;border:0;color:var(--dim);font-size:12px;padding:4px 2px;cursor:pointer;font-family:var(--sans);text-decoration:underline;text-underline-offset:2px}
+.lg{border-bottom:1px solid var(--line)}
+.lg:last-child{border-bottom:0}
+.lg.off .lg-s,.lg.off .lg-t{opacity:.38}
+.lg.off .lg-t{text-decoration:line-through}
+.lg-h{display:flex;align-items:center;gap:8px;padding:11px 14px 4px}
+.sw{width:22px;height:22px;flex:0 0 auto;border-radius:6px;border:1px solid var(--line);background:var(--panel2);
+  color:var(--vo2);font-size:13px;line-height:20px;text-align:center;padding:0;cursor:pointer}
+.lg.off .sw{color:var(--dim2)}
+.ty{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.08em;padding:3px 6px;border-radius:4px;flex:0 0 auto;text-transform:uppercase}
+.ty-single{background:rgba(96,165,250,.15);color:var(--str)}
+.ty-rounds{background:rgba(244,114,182,.15);color:var(--wod)}
+.lg-t{font-size:14px;font-weight:600;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ed{background:none;border:1px solid var(--line);color:var(--dim);border-radius:6px;font-size:11px;padding:3px 8px;cursor:pointer;flex:0 0 auto;font-family:var(--sans)}
+.lg.open .ed{color:var(--main);border-color:rgba(240,180,41,.35)}
+.lg-s{padding:0 14px 11px 44px;font-family:var(--mono);font-size:12px;color:#b6c0cd;line-height:1.6;white-space:pre-wrap}
+.lg-s .mv{color:var(--tx)}
+.lg-s .sc{color:var(--lactic)}
+.lg-s .nt{color:var(--dim)}
+.lg-e{padding:2px 14px 13px;display:none}
+.lg.open .lg-e{display:block}
+.lf{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:0 0 8px}
+.lf .full{grid-column:1/-1}
+.li{width:100%;min-width:0;background:#0f1317;border:1px solid var(--line);color:var(--tx);border-radius:6px;
+  padding:6px 4px;font-family:var(--mono);font-size:16px;line-height:1.2;letter-spacing:-.03em}
+.li:focus{border-color:rgba(240,180,41,.5);outline:0}
+.li::placeholder{color:var(--dim2)}
+.lcap{font-family:var(--mono);font-size:9px;letter-spacing:.06em;color:var(--dim2);text-transform:uppercase;margin:0 0 3px}
+.mvb{background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:8px;margin:0 0 8px}
+.rw{display:grid;gap:4px;align-items:end;margin-top:6px}
+.rw.c5{grid-template-columns:.8fr 1fr 1.25fr .9fr 1.1fr 20px}
+.rw.c4{grid-template-columns:1fr 1.25fr .9fr 1.1fr 20px}
+.rw.cf{grid-template-columns:1fr 22px}
+.rl{font-family:var(--mono);font-size:10px;color:var(--dim);margin-top:7px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rx{background:none;border:0;color:var(--dim2);font-size:16px;padding:0 0 6px;cursor:pointer;line-height:1}
+.lbtns{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:6px}
+.chip{background:var(--panel2);border:1px solid var(--line);color:var(--dim);border-radius:6px;font-size:12px;padding:5px 9px;cursor:pointer;font-family:var(--sans)}
+.chip.on{color:var(--lactic);border-color:rgba(245,158,11,.4)}
+.lp-f{padding:12px 14px 14px;border-top:1px solid var(--line)}
+.lp-f .btn{width:100%}
+.lst{font-family:var(--mono);font-size:11.5px;text-align:center;margin-top:8px;color:var(--dim)}
+.lst.sending{color:var(--main)}.lst.sent{color:var(--vo2)}.lst.error{color:var(--alactic)}
+.btn:disabled{opacity:.55}
+.lp-n{padding:9px 14px;border-bottom:1px solid var(--line);display:flex;gap:8px;align-items:center}
+.lp-n .li{font-size:16px}
+.pj{margin:8px 0 0;max-height:260px;overflow:auto;background:#0a0d10;border:1px solid var(--line);border-radius:8px;
+  padding:9px;font-family:var(--mono);font-size:10.5px;color:#9fb0c3;white-space:pre}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 :focus-visible{outline:2px solid var(--main);outline-offset:2px}
 </style>
@@ -281,18 +333,22 @@ function sess(n,day){
     h+=`</div>`;
   });
 
-  h+=`</div><div class="actions">
+  h+=`</div>
+  <div class="sec">Propuesta de logs · BTWB</div>
+  <div class="card" id="lp"></div>
+  <div class="actions">
     <button class="btn ${isDone?"ok":""}" id="mk">${isDone?"✓ Hecha":"Marcar hecha"}</button>
     <button class="btn pri" id="ex">Copiar para BTWB</button>
   </div>`;
   app.innerHTML=h;
+  LogUI.mount(n,day);
 
   document.getElementById("mk").onclick=e=>{
     if(done[k]){ delete done[k]; } else { done[k]=1; }
     save(); sess(n,day);
   };
   document.getElementById("ex").onclick=()=>{
-    const code=`P14W${String(n).padStart(2,"0")}S${["LUN","MAR","MIE","JUE","VIE","SAB"].indexOf(day)+1}`;
+    const code=sessCode(n,day);
     let t=`${code} · Semana ${n} · ${s.dayname} · ${w.blocklabel} · ${s.total}'\n\n`;
     s.blocks.forEach(b=>{
       if(b.kind==="warmup"||b.kind==="mob") return;
@@ -313,6 +369,417 @@ function fallback(t,ok){
   try{document.execCommand("copy");ok();}catch(e){toast("No se pudo copiar en este navegador.");}
   document.body.removeChild(a);
 }
+
+/* ═══════════ PROPUESTA DE LOGS · BTWB vía Vita ═══════════
+   Una sesión → varios logs BTWB. Flujo: proponer (desde P) → editar → aceptar.
+   Nada se marca hecho ni se envía hasta "Aceptar y loguear todos".
+   Contrato del payload: docs/vita-btwb-logs.md                                   */
+const VITA={agent:"Vita · Salud y longevidad",agentId:"5a108750-c1c9-4969-9687-35dd7ac85ecd",mcp:"btwb-mcp"};
+const LOGS_KEY="p16w-logs-v1", OUTBOX_KEY="p16w-vita-outbox", SCHEMA="rebuild-strong.btwb-log-batch/v1";
+const DAYS=["LUN","MAR","MIE","JUE","VIE","SAB"];
+function sessCode(n,day){ return `P14W${String(n).padStart(2,"0")}S${DAYS.indexOf(day)+1}`; }
+function today(){ const d=new Date(); return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"); }
+
+let drafts={};
+try{ drafts=JSON.parse(localStorage.getItem(LOGS_KEY)||"{}")||{}; }catch(e){ drafts={}; }
+let _dT=0;
+function saveDrafts(now){
+  clearTimeout(_dT);
+  const f=()=>{ try{ localStorage.setItem(LOGS_KEY,JSON.stringify(drafts)); }catch(e){} };
+  if(now) f(); else _dT=setTimeout(f,250);
+}
+
+/* Nombres BTWB para los movimientos más habituales (Vita resuelve el resto). */
+const BTWB={"back squat":"Back Squat","front squat":"Front Squat","bench press":"Bench Press","deadlift":"Deadlift",
+  "strict press":"Shoulder Press","push press":"Push Press","pendlay row":"Pendlay Row",
+  "dominada estricta lastrada":"Weighted Pull-up","dominada lastrada":"Weighted Pull-up",
+  "fondo estricto lastrado":"Weighted Dip","fondo lastrado":"Weighted Dip","fondo estricto lastrado (anillas)":"Weighted Ring Dip",
+  "clean & jerk":"Clean & Jerk","snatch":"Snatch","power clean":"Power Clean","power snatch":"Power Snatch",
+  "assault bike":"Assault Bike","row":"Row","bike erg":"Bike Erg","carrera":"Run","thrusters":"Thruster",
+  "burpees":"Burpee","air squats":"Air Squat","flexiones":"Push-up","hollow rocks":"Hollow Rock",
+  "kettlebell swings":"Kettlebell Swing","deadlift ":"Deadlift","hang power clean":"Hang Power Clean","push jerk":"Push Jerk"};
+const btwbName=n=>BTWB[String(n||"").toLowerCase().trim()]||null;
+
+/* ── parsing de prescripciones de P ── */
+const R0=()=>({lbl:"",sets:"",reps:"",kg:"",rpe:"",tempo:"",x:"",free:""});
+function kgOf(s){
+  const m=s.match(/@\s*(\+?\d+(?:[.,]\d+)?)\s*kg/)||s.match(/(?:guía|con)\s+(\+?\d+(?:[.,]\d+)?)\s*kg/)
+        ||s.match(/\d+\s*×\s*(\d+(?:[.,]\d+)?)\s*kg/)||s.match(/(\+?\d+(?:[.,]\d+)?)\s*kg/);
+  return m?m[1]:"";
+}
+/* Una línea de prescripción → fila {lbl,sets,reps,kg,rpe,tempo}. null si no es una serie. */
+function rowOf(line,def){
+  const L=line.trim(), r=R0(); let m, i=-1;
+  if((m=L.match(/(\d+)\s*series de \(([^)]+)\)/))){ r.sets=m[1]; r.reps=(m[2].match(/\d+(?=\s*[a-zA-ZÀ-ú])/g)||[]).join("+"); i=m.index; }
+  else if((m=L.match(/(\d+)\s*×\s*\((\d+(?:\+\d+)*)\)/))){ r.sets=m[1]; r.reps=m[2]; i=m.index; }
+  else if((m=L.match(/(\d+)\s*×\s*(\d+(?:\+\d+)*)(?![\d,.:"'″]|\s*kg)/))){ r.sets=m[1]; r.reps=m[2]; i=m.index; }
+  else if((m=L.match(/(\d+)\s*singles\b/))){ r.sets=m[1]; r.reps="1"; i=m.index; }
+  else if((m=L.match(/(\d+(?:\+\d+)*)\s*reps/))){ r.sets="1"; r.reps=m[1]; i=m.index; }
+  else if((m=L.match(/^(\d+(?:\+\d+)*)(?:\s+(?:pasos|reps))?(?=\s*(?:@|con\b|·|$))/))){ r.reps=m[1]; i=0; }
+  else if((m=L.match(/^máx\S*/i))){ r.reps="máx"; i=0; }
+  else return null;
+  const pre=L.slice(0,i).replace(/[\s:·,-]+$/,"").replace(/:\s*activación$/i,"").trim();
+  if(pre.length>34) return null;                                   // texto largo: no es una serie limpia
+  if(/\+\s*\d+(?:[.,]\d+)?\s+(?!kg)[a-zA-ZÀ-ú]/.test(L.slice(i+m[0].length)) && !/series de/.test(L)) return null; // compuesto (7 + 7 + 7…)
+  r.lbl=pre||def||"";
+  r.kg=kgOf(L);
+  const rpe=L.match(/RPE\s*(\d+(?:[.,]\d+)?)/); if(rpe) r.rpe=rpe[1];
+  const tp=L.match(/tempo\s+([0-9X]{4})/i); if(tp) r.tempo=tp[1];
+  const myo=L.slice(i+1).match(/\+\s*(\d+)\s*×\s*(\d+)/); if(myo && /×/.test(L.slice(i,i+8))) r.reps+=`+${myo[1]}×${myo[2]}`;
+  const tail=L.match(/→.*$/); if(tail) r.x=tail[0];
+  return r;
+}
+const escA=s=>esc(s==null?"":s).replace(/"/g,"&quot;");
+const freeRow=(txt,lbl)=>Object.assign(R0(),{lbl:lbl||"",free:String(txt).trim()});
+
+/* Bloques con A) / B) / FASE n → movimientos con sus filas */
+function parseGroup(text){
+  const mvs=[], get=n=>{ let m=mvs.find(x=>x.name===n); if(!m){ m={name:n,rows:[]}; mvs.push(m);} return m; };
+  let ph={r:"",lbl:"Series"}, cur=null, rounds="";
+  const add=(mv,txt)=>{ const r=rowOf(txt,ph.lbl)||freeRow(txt,ph.lbl); if(!r.sets&&ph.r&&!r.free) r.sets=ph.r; mv.rows.push(r); };
+  text.split("\n").forEach(raw=>{
+    const L=raw.trim(); if(!L) return; let m;
+    if((m=L.match(/^FASE\s*\d+\s*·\s*(.*)$/i))){
+      const rr=m[1].match(/(\d+)\s*rondas?/), s0=m[1].split(" · ")[0].trim();
+      ph={r:rr?rr[1]:"",lbl:/top set/i.test(m[1])?"Top set":"Series"}; if(rr&&!rounds) rounds=rr[1];
+      cur=(s0&&!/top set|alternand|rondas?|back-off|sin alternar/i.test(s0))?get(s0):null;
+      return;
+    }
+    if((m=L.match(/^[A-Z]\)\s*(.+?)\s·\s(.+)$/))){ cur=get(m[1].trim()); add(cur,m[2]); return; }
+    if((m=L.match(/^[A-Z]\)\s*(.+)$/))){ cur=get(m[1].trim()); return; }
+    if(!mvs.length&&(m=L.match(/(\d+)\s*rondas?/))){ rounds=m[1]; ph.r=m[1]; return; }
+    const tp=L.match(/^Tempo\s+([0-9X]{4})/i);
+    if(tp){ const t=mvs[0]&&mvs[0].rows[mvs[0].rows.length-1]; if(t&&!t.tempo) t.tempo=tp[1]; return; }
+    if(cur&&/^(\d|máx|Density|Tabata|Cluster)/i.test(L)) add(cur,L);
+  });
+  mvs.forEach(m=>{ if(!m.rows.length) m.rows.push(freeRow("")); });
+  return {mvs,rounds};
+}
+
+let _id=0;
+const uid=()=>"L"+Date.now().toString(36).slice(-4)+(++_id).toString(36)+Math.random().toString(36).slice(2,5);
+function mkLog(type,title,mvs,extra){
+  return Object.assign({id:uid(),on:true,type,title,mvs,scheme:"",rounds:"",score:"",scaled:false,note:"",
+    src:[],rx:"",kind:"",tag:"",test:false,cond:false},extra||{});
+}
+const headOf=n=>n.split(" · ")[0].trim(), tailOf=n=>n.split(" · ").slice(1).join(" · ").trim();
+
+function testLogs(b,base){
+  const mark=s=>{ const m=s.match(/1\s*@?\s*(\+?\d+(?:[.,]\d+)?)\s*kg\s*\((?:1RM|marca)/); return m?m[1]:""; };
+  const out=[], lines=b.t.split("\n").map(x=>x.trim());
+  lines.forEach(L=>{ const m=L.match(/^[A-Z]\)\s*(.+?)\s·\s(.+)$/);
+    if(m) out.push(mkLog("single",m[1]+" · 1RM",[{name:m[1],rows:[Object.assign(R0(),{lbl:"1RM",sets:"1",reps:"1",kg:mark(m[2])})]}],Object.assign({},base,{test:true}))); });
+  if(!out.length){ const name=headOf(b.n)==="TEST 1RM"?tailOf(b.n):headOf(b.n);
+    out.push(mkLog("single",name+" · 1RM",[{name,rows:[Object.assign(R0(),{lbl:"1RM",sets:"1",reps:"1",kg:mark(b.t)})]}],Object.assign({},base,{test:true}))); }
+  return out;
+}
+function wodLog(b,base){
+  const tail=tailOf(b.n)||b.n; let scheme=tail; const mvs=[];
+  const rounds=(tail.match(/(\d+)\s*rondas?/)||[])[1]||"";
+  b.t.split("\n").forEach(raw=>{
+    const L=raw.trim().replace(/^\d+\)\s*/,""); if(!L) return;
+    const m=L.match(/^(\d+(?:[.,]\d+)?(?:\s*(?:m|cal|calorías)\b)?)\s+([^\d×].*)$/i);
+    if(m){ let name=m[2], kg=""; const k=name.match(/\s(\d+(?:[.,]\d+)?)\s*kg$/);
+      if(k&&!/×\s*$/.test(name.slice(0,k.index))){ kg=k[1]; name=name.slice(0,k.index).trim(); }
+      mvs.push({name,rows:[Object.assign(R0(),{reps:m[1],kg})]}); return; }
+    if(/AMRAP|EMOM|Tabata|rondas|×|^·|%|cap/i.test(L)){ scheme+=" · "+L.replace(/^·\s*/,""); return; }
+    if(L.includes(" · ")){ L.split(" · ").forEach(x=>mvs.push({name:x.trim(),rows:[R0()]})); return; }
+    mvs.push({name:L,rows:[R0()]});
+  });
+  return [mkLog("rounds",b.n,mvs,Object.assign({},base,{scheme,rounds}))];
+}
+function condLog(b,base){
+  const first=b.t.split("\n")[0], segs=first.split(" · ");
+  const m=segs[0].match(/^(\d+)\s*×\s*(\S+(?:\s(?:m|cal)\b)?)\s+(.+)$/);
+  if(m){ let name=m[3], lbl=""; const a=name.match(/^(.+?)\s+(a\s.+|al\s.+|máximo|duro|fuerte)$/); if(a){ name=a[1]; lbl=a[2]; }
+    return [mkLog("rounds",b.n,[{name,rows:[Object.assign(R0(),{x:lbl,reps:m[2]})]}],
+      Object.assign({},base,{cond:true,rounds:m[1],scheme:`Intervalos ${m[1]}×${m[2]}`+(segs[1]?" · "+segs.slice(1).join(" · "):"")}))]; }
+  const d=first.match(/^(\d+(?:[.,]\d+)?\s*(?:'|min|km|m)(?![a-z]))/), name=(tailOf(b.n)||b.n).replace(/\s+continu[oa]$/i,"");
+  return [mkLog("single",b.n,[{name,rows:[Object.assign(R0(),{lbl:"Duración",sets:"1",reps:d?d[1].trim():""})]}],
+    Object.assign({},base,{cond:true,scheme:first}))];
+}
+function blockLogs(b,bi){
+  if(b.kind==="warmup"||b.kind==="mob") return [];
+  const base={src:[bi],rx:b.t+((b.bo||[]).length?"\n"+b.bo.join("\n"):""),kind:b.kind,tag:b.tag||""};
+  if(/TEST/.test(b.tag||"")&&b.kind!=="cond"&&b.kind!=="wod") return testLogs(b,base);
+  if(b.kind==="wod"||b.kind==="home") return wodLog(b,base);
+  if(b.kind==="cond") return condLog(b,base);
+  if(b.kind==="oly"){ const name=tailOf(b.n)||b.n; const r=rowOf(b.t.split("\n")[0],"Series")||freeRow(b.t.split("\n")[0]);
+    return [mkLog("single",name,[{name,rows:[r]}],base)]; }
+  const paired=/^\s*[A-Z]\)/m.test(b.t);
+  if(paired){
+    const g=parseGroup(b.t);
+    if(g.mvs.length){ (b.bo||[]).forEach(l=>{ const r=rowOf(l,"Back-off"); if(r) g.mvs[0].rows.push(r); }); }
+    // superserie accesoria → 1 log de rondas; el resto (antagonistas, básicos emparejados, secuencias) → un log por movimiento
+    if(b.tag==="SS ACC") return [mkLog("rounds",b.n.replace(/\s*⇄\s*/g," / "),g.mvs,
+      Object.assign({},base,{rounds:g.rounds,scheme:b.t.split("\n")[0].trim()}))];
+    return g.mvs.map(m=>mkLog("single",m.name,[m],base));
+  }
+  if(/^FASE/m.test(b.t)){ const g=parseGroup(b.t); return g.mvs.map(m=>mkLog("single",m.name,[m],base)); }
+  const rows=[];
+  b.t.split("\n").forEach(l=>{ const tp=l.match(/^\s*Tempo\s+([0-9X]{4})/i);
+    if(tp){ const lr=rows[rows.length-1]; if(lr&&!lr.tempo) lr.tempo=tp[1]; return; }
+    const r=rowOf(l,"Series"); if(r) rows.push(r); });
+  (b.bo||[]).forEach(l=>{ const r=rowOf(l,"Back-off"); if(r) rows.push(r); });
+  const name=headOf(b.n);
+  return [mkLog("single",name,[{name,rows:rows.length?rows:[freeRow(b.t.split("\n")[0])]}],base)];
+}
+function proposeLogs(s){ const out=[]; s.blocks.forEach((b,i)=>blockLogs(b,i).forEach(l=>out.push(l))); return out; }
+
+function getDraft(n,day){
+  const k=key(n,day);
+  if(!drafts[k]||!Array.isArray(drafts[k].logs)){
+    const s=P[n-1].sessions.find(x=>x.day===day);
+    drafts[k]={v:1,date:today(),note:"",warm:false,logs:proposeLogs(s),st:{s:"draft",msg:""},rev:0};
+    saveDrafts(true);
+  }
+  return drafts[k];
+}
+
+/* ── formato legible ── */
+function fmtRow(r,isR){
+  if(r.free) return (r.lbl&&r.lbl!=="Series"?r.lbl+": ":"")+r.free+(r.kg?` @ ${r.kg} kg`:"");
+  let s="";
+  if(r.reps){
+    if(isR) s=r.reps;
+    else if(/1rm/i.test(r.lbl)&&r.reps==="1") s="";
+    else if(r.sets&&!(r.sets==="1"&&/top set|1rm|duraci/i.test(r.lbl))) s=/\+/.test(r.reps)&&!/×/.test(r.reps)?`${r.sets}×(${r.reps})`:`${r.sets}×${r.reps}`;
+    else s=/^\d+$/.test(r.reps)&&!/duraci/i.test(r.lbl)?`${r.reps} reps`:r.reps;
+  }
+  if(r.kg) s+=` @ ${r.kg} kg`;
+  if(r.rpe) s+=` (RPE ${r.rpe})`;
+  if(r.tempo) s+=` · ${r.tempo}`;
+  if(r.x) s+=` ${r.x}`;
+  s=s.trim();
+  return (r.lbl&&r.lbl!=="Series"?r.lbl+(/^@/.test(s)?" ":": "):"")+s;
+}
+function logLines(l){
+  const isR=l.type==="rounds", out=[];
+  if(isR) out.push({c:"sc",t:(l.scheme||"Rondas")+(l.rounds&&!/rondas|×/.test(l.scheme)?` · ${l.rounds} rondas`:"")});
+  l.mvs.forEach(m=>{
+    if(isR){ out.push({c:"",t:"• "+[m.name,m.rows.map(r=>fmtRow(r,true)).filter(Boolean).join(" | ")].filter(Boolean).join(" — ")}); }
+    else m.rows.forEach(r=>out.push({c:"",t:fmtRow(r,false)}));
+  });
+  if(l.score) out.push({c:"mv",t:"Resultado: "+l.score});
+  if(l.scaled) out.push({c:"sc",t:"Scaled"});
+  if(l.note) out.push({c:"nt",t:"✎ "+l.note});
+  return out;
+}
+const logText=l=>logLines(l).map(x=>x.t).join("\n");
+
+/* ── payload para Vita ── */
+function num(s){ if(s==null||s==="") return null; const v=parseFloat(String(s).replace(",",".").replace(/^\+/,"")); return isNaN(v)?null:v; }
+function loadOf(kg){ const t=String(kg||"").trim(); if(!t) return {load_kg:null,load_mode:null};
+  return {load_kg:num(t),load_mode:/^\+/.test(t)?"added_to_bodyweight":"absolute"}; }
+function repsNum(t){ t=String(t||""); if(/^\d+(\+\d+)*$/.test(t)) return t.split("+").reduce((a,b)=>a+ +b,0); return null; }
+function rowPayload(r){
+  return Object.assign({label:r.lbl||null,sets:num(r.sets),reps:repsNum(r.reps),reps_text:r.reps||null},loadOf(r.kg),
+    {rpe:num(r.rpe),tempo:r.tempo||null,extra:r.x||null,text:r.free||null,readable:fmtRow(r,false)});
+}
+function expandSets(r){
+  if(r.free) return [Object.assign({set:null,label:r.lbl||null,reps:null,reps_text:null,text:r.free},loadOf(r.kg))];
+  const base=Object.assign({label:r.lbl||null},loadOf(r.kg),{rpe:num(r.rpe),tempo:r.tempo||null});
+  const out=[], t=String(r.reps||"");
+  if(/×/.test(t)){ t.split("+").forEach(p=>{ const m=p.match(/(\d+)\s*×\s*(\d+)/);
+      if(m) for(let i=0;i<+m[1];i++) out.push(Object.assign({},base,{reps:+m[2],reps_text:m[2]}));
+      else out.push(Object.assign({},base,{reps:repsNum(p),reps_text:p})); });
+    return out; }
+  const n=parseInt(r.sets,10)||1;
+  for(let i=0;i<n;i++) out.push(Object.assign({},base,{reps:repsNum(t),reps_text:t||null}));
+  return out;
+}
+function buildEnvelope(n,day){
+  const w=P[n-1], s=w.sessions.find(x=>x.day===day), d=getDraft(n,day), code=sessCode(n,day);
+  const act=d.logs.filter(l=>l.on);
+  let snote=d.note||"";
+  if(d.warm){ const wu=s.blocks.filter(b=>b.kind==="warmup"||b.kind==="mob").map(b=>`${b.n}: ${b.t}`).join("\n"); snote=[snote,wu].filter(Boolean).join("\n"); }
+  const logs=act.map((l,i)=>{
+    const isR=l.type==="rounds";
+    const notes=[l.note,l.scaled?"Scaled":""].filter(Boolean).join(" · ");
+    const p={seq:i+1,id:l.id,type:l.type,tool:isR?"log_rounds_workout":"log_workout",title:l.title,date:d.date,
+      scaled:!!l.scaled,result:l.score||null,notes:notes||null,description:logText(l),
+      is_test:!!l.test,prescribed:l.rx||null,source:{blocks:l.src.map(i=>s.blocks[i]&&s.blocks[i].n),kind:l.kind,tag:l.tag||null}};
+    if(isR){ Object.assign(p,{scheme:l.scheme||null,rounds:num(l.rounds),
+      movements:l.mvs.map(m=>({name:m.name,btwb_name:btwbName(m.name),prescription:m.rows.map(rowPayload)}))}); }
+    else { const m=l.mvs[0]; Object.assign(p,{movement:{name:m.name,btwb_name:btwbName(m.name)},
+      rows:m.rows.map(rowPayload),sets:[].concat(...m.rows.map(expandSets)).map((x,j)=>Object.assign(x,{set:j+1}))}); }
+    return p;
+  });
+  const summary=[`Rebuild Strong · ${code} · Semana ${n} (${w.blocklabel}) · ${s.dayname} · ${d.date}`,
+    `${logs.length} log${logs.length===1?"":"s"} para BTWB:`,
+    ...logs.map(p=>`\n${p.seq}. ${p.title} [${p.type} → ${p.tool}]\n`+p.description.split("\n").map(x=>"   "+x).join("\n")),
+    snote?`\nNotas de sesión: ${snote}`:""].join("\n").trim();
+  return {schema:SCHEMA,batch_id:`${code}-${d.date}`,revision:d.rev||1,created_at:new Date().toISOString(),
+    target:Object.assign({},VITA,{tools:{single:"log_workout",rounds:"log_rounds_workout"}}),
+    session:{code,program:"Programa 16 Semanas v17",week:n,block:w.blocklabel,day,dayname:s.dayname,focus:s.focus,date:d.date,
+      notes:snote||null,completed_local:true},
+    logs,summary};
+}
+function vitaMessage(env){
+  return `@${VITA.agent} (agentId ${VITA.agentId})\n`+
+    `Registra en BTWB estos ${env.logs.length} logs con ${VITA.mcp}: type "single" → log_workout · type "rounds" → log_rounds_workout. `+
+    `Un registro por elemento de "logs", en orden "seq", con fecha "date". Idempotencia: batch_id ${env.batch_id} rev ${env.revision}.\n\n`+
+    env.summary+"\n\n```json\n"+JSON.stringify(env,null,1)+"\n```";
+}
+function copyText(t){
+  return new Promise((ok,ko)=>{
+    const fb=()=>{ const a=document.createElement("textarea"); a.value=t; a.style.position="fixed"; a.style.opacity="0";
+      document.body.appendChild(a); a.select(); let r=false; try{ r=document.execCommand("copy"); }catch(e){} document.body.removeChild(a);
+      r?ok():ko(new Error("no se pudo copiar")); };
+    if(navigator.clipboard&&navigator.clipboard.writeText) navigator.clipboard.writeText(t).then(ok).catch(fb); else fb();
+  });
+}
+
+/* ── Gancho de envío a Vita ──
+   Para conectar el envío real, registra un transporte:
+     RebuildStrong.setVitaTransport(async env => { …POST / bridge al agente…; return {msg:"Enviado a Vita"}; });
+   Sin transporte, se copia al portapapeles un mensaje listo para pegar en el chat de Vita.
+   Siempre se emite window event "rebuildstrong:vita-batch" (detail = envelope) y se guarda en el outbox local. */
+const VitaBridge={
+  transport:null,
+  send(env){
+    try{ const ob=JSON.parse(localStorage.getItem(OUTBOX_KEY)||"[]"); ob.push(env); localStorage.setItem(OUTBOX_KEY,JSON.stringify(ob.slice(-40))); }catch(e){}
+    try{ window.dispatchEvent(new CustomEvent("rebuildstrong:vita-batch",{detail:env})); }catch(e){}
+    if(typeof this.transport==="function")
+      return Promise.resolve().then(()=>this.transport(env)).then(r=>({mode:"transport",msg:(r&&r.msg)||`Enviado a Vita · ${env.logs.length} logs`}));
+    return copyText(vitaMessage(env)).then(()=>({mode:"clipboard",msg:`Preparado para Vita · ${env.logs.length} logs copiados (pégalos en su chat)`}));
+  }
+};
+window.RebuildStrong={vita:VITA,buildEnvelope,vitaMessage,
+  setVitaTransport(fn){ VitaBridge.transport=fn; },
+  outbox(){ try{ return JSON.parse(localStorage.getItem(OUTBOX_KEY)||"[]"); }catch(e){ return []; } },
+  resetDraft(w,d){ delete drafts[key(w,d)]; saveDrafts(true); }};
+
+/* ── UI del panel ── */
+const LogUI={
+  n:0,day:"",open:new Set(),showJson:false,
+  el(){ return document.getElementById("lp"); },
+  mount(n,day){ if(this.n!==n||this.day!==day){ this.open.clear(); this.showJson=false; } this.n=n; this.day=day; this.render(); this.bind(); },
+  d(){ return getDraft(this.n,this.day); },
+  locked(){ const st=this.d().st.s; return st==="sent"||st==="sending"; },
+  render(){
+    const el=this.el(); if(!el) return;
+    const d=this.d(), lock=this.locked(), act=d.logs.filter(l=>l.on).length;
+    let h=`<div class="lp-h"><span class="cnt">${act} de ${d.logs.length} logs activos</span>
+      <input type="date" data-g="date" value="${escA(d.date)}" ${lock?"disabled":""} aria-label="Fecha del log">
+      ${lock?"":`<button class="lnk" data-a="reset">Restablecer</button>`}</div>`;
+    d.logs.forEach((l,i)=>{ h+=this.logHtml(l,i,lock); });
+    if(!d.logs.length) h+=`<div class="pad" style="color:var(--dim);font-size:13px">Esta sesión no tiene bloques que loguear.</div>`;
+    h+=`<div class="lp-n"><input class="li" data-g="note" placeholder="Nota de sesión (opcional)" value="${escA(d.note||"")}" ${lock?"disabled":""}>
+      <button class="chip ${d.warm?"on":""}" data-a="warm" ${lock?"disabled":""} title="Añadir calentamiento y movilidad a las notas">Calent.</button></div>`;
+    const st=d.st||{s:"draft"};
+    let btn;
+    if(st.s==="sending") btn=`<button class="btn pri" disabled>${esc(st.msg)}</button>`;
+    else if(st.s==="sent") btn=`<button class="btn ok" data-a="resend">✓ Logueado · reenviar a Vita</button>`;
+    else if(st.s==="error") btn=`<button class="btn pri" data-a="accept">Reintentar · loguear ${act}</button>`;
+    else btn=`<button class="btn pri" data-a="accept" ${act?"":"disabled"}>Aceptar y loguear todos (${act})</button>`;
+    h+=`<div class="lp-f">${btn}
+      ${st.s!=="draft"?`<div class="lst ${st.s}">${esc(st.msg||"")}</div>`:`<div class="lst">Revisa, toca «Editar» solo si algo cambió, y acepta.</div>`}
+      ${st.s==="sent"||st.s==="error"?`<div class="lbtns" style="justify-content:center">
+        <button class="lnk" data-a="unlock">Editar de nuevo</button><button class="lnk" data-a="json">${this.showJson?"Ocultar":"Ver"} JSON</button></div>`:""}
+      ${this.showJson&&d.payload?`<pre class="pj">${esc(JSON.stringify(d.payload,null,1))}</pre>`:""}
+    </div>`;
+    el.innerHTML=h;
+  },
+  sumHtml(l){ return logLines(l).map(x=>x.c?`<span class="${x.c}">${esc(x.t)}</span>`:esc(x.t)).join("\n"); },
+  logHtml(l,i,lock){
+    const isR=l.type==="rounds", open=this.open.has(l.id)&&!lock;
+    let h=`<div class="lg ${l.on?"":"off"} ${open?"open":""}" data-l="${i}">
+      <div class="lg-h"><button class="sw" data-a="tog" ${lock?"disabled":""} aria-label="${l.on?"Desactivar":"Activar"} log">${l.on?"✓":""}</button>
+      <span class="ty ty-${l.type}">${isR?"rounds":"single"}</span><span class="lg-t">${esc(l.title)}</span>
+      ${lock?"":`<button class="ed" data-a="edit">${open?"Listo":"Editar"}</button>`}</div>
+      <div class="lg-s" id="ls-${l.id}">${this.sumHtml(l)}</div>`;
+    if(open){
+      h+=`<div class="lg-e"><div class="lf">
+        <div class="full"><div class="lcap">Título</div><input class="li" data-f="title" value="${escA(l.title)}"></div>`;
+      if(isR) h+=`<div class="full"><div class="lcap">Formato</div><input class="li" data-f="scheme" value="${escA(l.scheme)}"></div>
+        <div><div class="lcap">Rondas</div><input class="li" data-f="rounds" inputmode="numeric" value="${escA(l.rounds)}"></div>`;
+      if(isR||l.test||l.cond) h+=`<div class="${isR?"":"full"}"><div class="lcap">Resultado</div><input class="li" data-f="score" value="${escA(l.score)}" placeholder="${escA(this.ph(l))}"></div>`;
+      h+=`</div>`;
+      l.mvs.forEach((m,mi)=>{
+        h+=`<div class="mvb"><div class="lcap">Movimiento${btwbName(m.name)?" · BTWB: "+esc(btwbName(m.name)):""}</div><input class="li" data-f="name" data-m="${mi}" value="${escA(m.name)}" aria-label="Movimiento">`;
+        const cols=isR?"c4":"c5";
+        h+=`<div class="rw ${cols}" style="margin-top:6px">${isR?"":`<div class="lcap">series</div>`}<div class="lcap">reps</div><div class="lcap">kg</div><div class="lcap">RPE</div><div class="lcap">tempo</div><div></div></div>`;
+        m.rows.forEach((r,ri)=>{
+          const a=(f,ph,im)=>`<input class="li" data-f="${f}" data-m="${mi}" data-r="${ri}" value="${escA(r[f]||"")}" placeholder="${ph}" ${im?`inputmode="${im}"`:""}>`;
+          if(r.lbl) h+=`<div class="rl">${esc(r.lbl)}</div>`;
+          if(r.free!==""&&r.free!=null) h+=`<div class="rw cf">${a("free","prescripción")}<button class="rx" data-a="delrow" data-m="${mi}" data-r="${ri}" aria-label="Quitar serie">×</button></div>`;
+          else h+=`<div class="rw ${cols}">${isR?"":a("sets","1","numeric")}${a("reps","–")}${a("kg","–","decimal")}${a("rpe","–","decimal")}${a("tempo","–")}
+            <button class="rx" data-a="delrow" data-m="${mi}" data-r="${ri}" aria-label="Quitar serie">×</button></div>`;
+        });
+        h+=`<div class="lbtns"><button class="chip" data-a="addrow" data-m="${mi}">+ serie</button></div></div>`;
+      });
+      h+=`<div class="lf"><div class="full"><div class="lcap">Nota del log</div><input class="li" data-f="note" value="${escA(l.note)}" placeholder="breve: sensaciones, cambios…"></div></div>
+        <div class="lbtns"><button class="chip ${l.scaled?"on":""}" data-a="scaled">Scaled</button>
+        ${isR&&l.mvs.length>1?`<button class="chip" data-a="split">Separar en ${l.mvs.length}</button>`:""}
+        ${i<this.d().logs.length-1?`<button class="chip" data-a="merge">Agrupar con siguiente</button>`:""}</div></div>`;
+    }
+    return h+`</div>`;
+  },
+  ph(l){ const s=(l.scheme||"")+" "+l.title;
+    if(l.test) return "kg levantados (1RM)"; if(/AMRAP/i.test(s)) return "rondas + reps";
+    if(/tiempo/i.test(s)) return "mm:ss"; if(l.cond&&l.type==="rounds") return "cal / ritmo / distancia por intervalo";
+    if(l.cond) return "distancia · ppm medias"; return "reps / notas"; },
+  bind(){
+    const el=this.el(); if(!el||el._b) return; el._b=1;
+    el.addEventListener("input",e=>{
+      const t=e.target, d=this.d();
+      if(t.dataset.g){ d[t.dataset.g]=t.value; saveDrafts(); return; }
+      const lg=t.closest(".lg"); if(!lg||!t.dataset.f) return;
+      const l=d.logs[+lg.dataset.l], f=t.dataset.f;
+      if(t.dataset.r!=null) l.mvs[+t.dataset.m].rows[+t.dataset.r][f]=t.value;
+      else if(f==="name") l.mvs[+t.dataset.m].name=t.value;
+      else l[f]=t.value;
+      const s=document.getElementById("ls-"+l.id); if(s) s.innerHTML=this.sumHtml(l);
+      if(f==="title"){ const tt=lg.querySelector(".lg-t"); if(tt) tt.textContent=t.value; }
+      saveDrafts();
+    });
+    el.addEventListener("click",e=>{
+      const b=e.target.closest("[data-a]"); if(!b||b.disabled) return;
+      const d=this.d(), lg=b.closest(".lg"), i=lg?+lg.dataset.l:-1, l=i>=0?d.logs[i]:null, a=b.dataset.a;
+      if(a==="accept") return this.accept();
+      if(a==="resend") return this.accept(true);
+      if(a==="unlock"){ d.st={s:"draft",msg:""}; saveDrafts(true); return this.render(); }
+      if(a==="json"){ this.showJson=!this.showJson; return this.render(); }
+      if(a==="reset"){ if(!confirm("¿Descartar tus ediciones y volver a la propuesta del programa?")) return;
+        delete drafts[key(this.n,this.day)]; this.open.clear(); getDraft(this.n,this.day); return this.render(); }
+      if(a==="warm"){ d.warm=!d.warm; }
+      else if(a==="tog"){ l.on=!l.on; if(!l.on) this.open.delete(l.id); }
+      else if(a==="edit"){ this.open.has(l.id)?this.open.delete(l.id):this.open.add(l.id); }
+      else if(a==="scaled"){ l.scaled=!l.scaled; }
+      else if(a==="addrow"){ const m=l.mvs[+b.dataset.m], last=m.rows[m.rows.length-1]; m.rows.push(Object.assign(R0(),last?{lbl:last.lbl,sets:last.free?"":"1",reps:last.reps,kg:last.kg,free:last.free?" ":""}:{})); }
+      else if(a==="delrow"){ const m=l.mvs[+b.dataset.m]; m.rows.splice(+b.dataset.r,1); if(!m.rows.length) m.rows.push(R0()); }
+      else if(a==="split"){
+        const parts=l.mvs.map(m=>{ m.rows.forEach(r=>{ if(!r.sets&&!r.free&&l.rounds) r.sets=l.rounds; });
+          return mkLog("single",m.name,[m],{src:l.src.slice(),rx:l.rx,kind:l.kind,tag:l.tag,scaled:l.scaled,note:l.note}); });
+        d.logs.splice(i,1,...parts); this.open.delete(l.id); parts.forEach(p=>this.open.add(p.id));
+      }
+      else if(a==="merge"){
+        const nx=d.logs[i+1]; if(!nx) return;
+        const rounds=l.rounds||nx.rounds||(l.mvs[0].rows[0]&&l.mvs[0].rows[0].sets)||"";
+        const mg=mkLog("rounds",[l.title,nx.title].join(" / "),l.mvs.concat(nx.mvs),{
+          src:[...new Set(l.src.concat(nx.src))],rx:[l.rx,nx.rx].filter(Boolean).join("\n"),kind:l.kind,tag:l.tag,
+          scheme:l.scheme||nx.scheme||"Superserie",rounds,score:[l.score,nx.score].filter(Boolean).join(" · "),
+          scaled:l.scaled||nx.scaled,note:[l.note,nx.note].filter(Boolean).join(" · "),on:l.on||nx.on});
+        d.logs.splice(i,2,mg); this.open.delete(l.id); this.open.add(mg.id);
+      }
+      saveDrafts(true); this.render();
+    });
+  },
+  accept(resend){
+    const d=this.d(), n=this.n, day=this.day, k=key(n,day), act=d.logs.filter(l=>l.on).length;
+    if(!act){ toast("No hay logs activos."); return; }
+    d.rev=(d.rev||0)+(resend?0:1);
+    d.st={s:"sending",msg:`Logueando ${act} entrada${act===1?"":"s"}…`}; this.render();
+    // marcar la sesión como hecha en el progreso local existente
+    if(!done[k]){ done[k]=1; save(); }
+    const mk=document.getElementById("mk"); if(mk){ mk.classList.add("ok"); mk.textContent="✓ Hecha"; }
+    const env=buildEnvelope(n,day); d.payload=env; saveDrafts(true);
+    VitaBridge.send(env).then(r=>{ d.st={s:"sent",msg:r.msg,at:new Date().toISOString(),mode:r.mode}; },
+      err=>{ d.st={s:"error",msg:"Error: "+((err&&err.message)||err)+" · la sesión queda marcada como hecha"}; })
+      .then(()=>{ saveDrafts(true); if(this.n===n&&this.day===day&&this.el()) this.render(); toast(d.st.msg); });
+  }
+};
 
 /* ─────────── router ─────────── */
 const navStack=[];
