@@ -53,7 +53,13 @@ mensaje en el chat de Vita en Grok.
 
 El icono de la app es el logo de El Toro (`icons/`): `apple-touch-icon.png` 180×180 (iPhone),
 167/152 (iPad), `icon-192.png` / `icon-512.png` (manifest) y `favicon-32.png`. Los PNG se generan desde el logo
-original, centrado sobre fondo verde (paleta Brute: negro + verde + rosa) con margen para las esquinas redondeadas de iOS.
+original, en negro sobre fondo rosa `#ff6ef5` (paleta de Brute: negro, rosa `#ff6ef5`, verde `#61fa69`, blanco) con margen para las esquinas redondeadas de iOS.
+
+## 🎨 Diseño
+
+El aspecto sigue la identidad de [Brute](https://www.brutetraining.com/): negro puro, titulares en rosa, etiquetas y
+botón principal (píldora) en verde, botones secundarios rectangulares con contorno rosa y rejilla verde de fondo.
+Tipografías libres (OFL) servidas desde `fonts/`: Familjen Grotesk (texto y titulares) y Doto (acento dot-matrix).
 
 ## ✅ Cómo probar
 
