@@ -7,7 +7,7 @@ A premium training companion for athletes who want structured strength, conditio
 
 ## 🧠 Current Status
 - Mobile-first web prototype
-- 16-week structured program
+- 12-week structured program (v18 · Conjugado-Powerbuilding + ESD, 7 sesiones/semana: 4 de fuerza, Cardiac Output, casa y yoga)
 - iPhone-style UI (PWA-ready base)
 - Fully static (no user tracking yet)
 
@@ -53,7 +53,7 @@ mensaje en el chat de Vita en Grok.
 
 El icono de la app es el logo de El Toro (`icons/`): `apple-touch-icon.png` 180×180 (iPhone),
 167/152 (iPad), `icon-192.png` / `icon-512.png` (manifest) y `favicon-32.png`. Los PNG se generan desde el logo
-original, centrado sobre fondo naranja con margen para las esquinas redondeadas de iOS.
+original, centrado sobre fondo verde (paleta Brute: negro + verde + rosa) con margen para las esquinas redondeadas de iOS.
 
 ## ✅ Cómo probar
 
@@ -67,7 +67,7 @@ original, centrado sobre fondo naranja con margen para las esquinas redondeadas 
    Con la extensión cargada, al aceptar se abre o activa Grok y el mensaje (resumen + JSON) se envía solo.
 
 **Icono de El Toro en el iPhone**:
-1. Si ya tenías la app en la pantalla de inicio con el icono «17», bórrala (iOS guarda el icono al añadirla).
+1. Si ya tenías la app en la pantalla de inicio con el icono anterior (naranja), bórrala (iOS guarda el icono al añadirla).
 2. En Safari abre https://eljugon.github.io/Rebuild-Strong/ (si ves el icono viejo, recarga la página;
    GitHub Pages puede tardar unos minutos en publicar).
 3. Pulsa Compartir → **Añadir a pantalla de inicio**: la vista previa y el icono deben mostrar el logo de El Toro.

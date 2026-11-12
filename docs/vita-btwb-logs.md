@@ -15,13 +15,14 @@ Contrato entre la app (Rebuild Strong, `index.html`) y el agente **Vita · Salud
    | `oly`                                         | 1 `single` (el complex como movimiento)   |
    | `wod` / `home`                                | 1 `rounds` (AMRAP / por tiempo / EMOM)    |
    | `cond` con intervalos (`9×10"…`)              | 1 `rounds` (intervalos)                   |
-   | `cond` continuo (Zona 2)                      | 1 `single`                                |
+   | `cond` continuo (Cardiac Output, test Bike Erg) | 1 `single` (duración)                   |
+   | `yoga` (domingo)                              | 1 `single` (duración; posturas en el esquema) |
    | `TEST` (1RM)                                  | 1 `single` por movimiento testeado        |
    | `warmup` / `mob`                              | se omite (opcional: botón «Calent.» → notas de sesión) |
 2. Cada log se puede activar/desactivar, editar (series, reps, kg, RPE, tempo, resultado, nota, scaled),
    añadir/quitar series, **agrupar con el siguiente** (→ `rounds`) o **separar** un `rounds` en `single`s.
-   Las ediciones se guardan en `localStorage["p16w-logs-v1"]`.
-3. **Aceptar y loguear todos**: marca la sesión como hecha (`localStorage["p16w-v17"]`), construye el
+   Las ediciones se guardan en `localStorage["p12w-v18-logs-v1"]`.
+3. **Aceptar y loguear todos**: marca la sesión como hecha (`localStorage["p12w-v18"]`), construye el
    envelope, lo guarda en `localStorage["p16w-vita-outbox"]` (últimos 40), emite el evento
    `window` `rebuildstrong:vita-batch` y lo entrega al transporte (ver más abajo).
    Antes de aceptar, no se envía nada ni se marca nada como hecho.
@@ -31,12 +32,12 @@ Contrato entre la app (Rebuild Strong, `index.html`) y el agente **Vita · Salud
 ```jsonc
 {
   "schema": "rebuild-strong.btwb-log-batch/v1",
-  "batch_id": "P14W01S1-2026-11-05",   // código de sesión + fecha → clave de idempotencia
+  "batch_id": "P18W01S1-2026-11-16",   // código de sesión + fecha → clave de idempotencia
   "revision": 1,                        // sube cada vez que el usuario re-edita y vuelve a aceptar
   "created_at": "2026-11-05T16:00:31Z",
   "target": { "agent": "Vita · Salud y longevidad", "agentId": "5a108750-…", "mcp": "btwb-mcp",
               "tools": { "single": "log_workout", "rounds": "log_rounds_workout" } },
-  "session": { "code": "P14W01S1", "week": 1, "block": "B1 · Estructural", "day": "LUN",
+  "session": { "code": "P18W01S1", "week": 1, "block": "M1 · Base aeróbica · Tests ESD", "day": "LUN",
                "dayname": "Lunes", "focus": "…", "date": "2026-11-05", "notes": null, "completed_local": true },
   "logs": [ /* solo los logs activos, en orden */ ],
   "summary": "texto legible de todo el lote"
